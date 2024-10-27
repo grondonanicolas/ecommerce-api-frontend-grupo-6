@@ -8,9 +8,11 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_d65ad6d0acdaa31",
+    "format": "prettier --write .",
+    "check-format": "prettier --check .",
     "storybook": "storybook dev -p 6006",
-    "chromatic": "npx chromatic --project-token=chpt_d65ad6d0acdaa31"
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -41,6 +43,7 @@
     "eslint-plugin-react-refresh": "^0.4.12",
     "eslint-plugin-storybook": "^0.10.1",
     "globals": "^15.9.0",
+    "prettier": "^3.3.3",
     "prop-types": "^15.8.1",
     "storybook": "^8.3.6",
     "vite": "^5.4.8"
