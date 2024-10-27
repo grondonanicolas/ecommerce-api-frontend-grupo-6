@@ -79,7 +79,7 @@ const Footer = () => {
             FAQ
           </Typography>
           <Typography variant="body2" color="textSecondary">
-            Account
+            My Account
           </Typography>
           <Typography variant="body2" color="textSecondary">
             Manage Deliveries
