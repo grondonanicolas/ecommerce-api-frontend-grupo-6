@@ -3,7 +3,10 @@ import { Card, CardMedia, CardContent, Typography, Box } from '@mui/material';
 
 const Item = ({ imageUrl, title, price }) => {
   return (
-    <Card elevation="0" sx={{ maxWidth: 250, borderRadius: '12px 12px 0 0' }}>
+    <Card
+      elevation="0"
+      sx={{ width: 250, borderRadius: '12px 12px 12px 12px' }}
+    >
       <CardMedia
         component="img"
         height="300"
@@ -13,7 +16,7 @@ const Item = ({ imageUrl, title, price }) => {
       />
       <CardContent>
         <Box display="flex" flexDirection="column" alignItems="left">
-          <Typography variant="body1" fontWeight="bold">
+          <Typography noWrap variant="body1" fontWeight="bold">
             {title}
           </Typography>
           <Typography variant="h6" color="text.secondary">
