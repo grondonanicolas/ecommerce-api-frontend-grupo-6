@@ -24,7 +24,7 @@ const ItemCategoriesFilter = ({ itemCategories }) => {
         onClick={() => setIsOpen(!isOpen)}
         sx={{ cursor: 'pointer' }}
       >
-        <Typography variant="h6" fontWeight="bold" sx={{ mr: 1 }}>
+        <Typography variant="h6" sx={{ mr: 1 }}>
           Categorias
         </Typography>
         <IconButton size="small">
