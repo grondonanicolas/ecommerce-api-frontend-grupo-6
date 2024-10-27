@@ -12,7 +12,6 @@ const CartItemList = ({ items, onQuantityChange, onRemove }) => {
         borderRadius: '16px',
         padding: 2,
         boxSizing: 'border-box',
-        maxHeight: '400px',
         overflowY: 'auto',
         overflowX: 'hidden',
         boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
