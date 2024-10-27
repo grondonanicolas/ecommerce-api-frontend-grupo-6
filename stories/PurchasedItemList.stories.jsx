@@ -1,4 +1,4 @@
-import PurchasedItemList from '../components/PurchasedItemList';
+import PurchasedItemList from '../src/components/PurchasedItemList';
 
 export default {
   title: 'Components/PurchasedItemList',

@@ -1,4 +1,4 @@
-import PurchasedItem from '../components/PurchasedItem';
+import PurchasedItem from '../src/components/PurchasedItem';
 
 export default {
   title: 'Components/PurchasedItem',
