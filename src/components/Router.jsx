@@ -5,6 +5,7 @@ import Login from '../pages/auth/login/Login';
 import Cart from '../pages/cart/Cart';
 import Catalog from '../pages/products/catalog/Catalog';
 import Historic from '../pages/products/historic/Historic';
+import Product from '../pages/products/product/Product';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: 'historic',
         element: <Historic />,
+      },
+      {
+        path: ':producId',
+        element: <Product />,
       },
     ],
   },
