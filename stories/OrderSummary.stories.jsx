@@ -9,7 +9,7 @@ const Template = (args) => <OrderSummary {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  subtotal: 565,
+  subtotal: 123123,
   discount: 113,
   discountPercentage: 20,
   deliveryFee: 15,

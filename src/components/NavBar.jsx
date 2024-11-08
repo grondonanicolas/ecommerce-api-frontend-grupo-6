@@ -7,8 +7,12 @@ import SearchBar from './SearchBar';
 
 const NavBar = () => {
   return (
-    <AppBar position="static" elevation={3} sx={{ backgroundColor: 'white' }}>
-      <Toolbar>
+    <AppBar
+      position="absolute"
+      elevation={0}
+      sx={{ paddingTop: 2, paddingBottom: 2, backgroundColor: 'white' }}
+    >
+      <Toolbar sx={{ minHeight: 'px' }}>
         <Typography
           color="black"
           variant="h6"
