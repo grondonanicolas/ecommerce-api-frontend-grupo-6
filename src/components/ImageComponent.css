@@ -1,0 +1,35 @@
+.image-component {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../images/Imagen.png'); /* Ajusta la ruta según sea necesario */
+    background-size: contain; /* Cambia a contain para mostrar la imagen completa */
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
+  .logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1; /* Asegura que el logo esté delante del fondo */
+  }
+  
+  .logo {
+    width: 100px; /* Ajusta el tamaño del logo según sea necesario */
+    margin-bottom: 10px;
+  }
+  
+  .social-icons {
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    gap: 15px;
+  }
+  .social-icons img {
+    width: 30px;
+    cursor: pointer;
+  }

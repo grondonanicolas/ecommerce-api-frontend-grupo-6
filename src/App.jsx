@@ -1,9 +1,23 @@
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import AuthProvider from './context/AuthContext';
+import HomePage from './pages/home/Home';
+import LoginPage from "./pages/auth/login/LoginPage";
+import SignUpPage from "./pages/auth/register/SignUpPage";
 
-import Router from './components/Router';
-
-const App = () => {
-  return <Router />;
-};
+function App() {
+  return (
+    <Router>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Navigate to="/home" />} /> {/* Redirección a home */}
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<SignUpPage />} />
+        </Routes>
+      </AuthProvider>
+    </Router>
+  );
+}
 
 export default App;

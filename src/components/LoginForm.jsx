@@ -18,7 +18,6 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle login logic
     console.log('Login form submitted:', formData);
   };
 
@@ -34,7 +33,10 @@ const LoginForm = () => {
       }}
     >
       <Typography variant="h4" fontWeight="bold" gutterBottom>
-        Login
+        Sign In
+      </Typography>
+      <Typography variant="body1" color="text.secondary" gutterBottom>
+        Please fill your information below
       </Typography>
 
       <TextField
@@ -56,7 +58,7 @@ const LoginForm = () => {
       <TextField
         name="password"
         type="password"
-        placeholder="Contraseña"
+        placeholder="Password"
         value={formData.password}
         onChange={handleChange}
         variant="outlined"
@@ -75,7 +77,7 @@ const LoginForm = () => {
         color="primary"
         onClick={handleSubmit}
         sx={{
-          borderRadius: '20px',
+          borderRadius: '10px',
           backgroundColor: 'black',
           color: 'white',
           padding: '10px',
@@ -85,16 +87,15 @@ const LoginForm = () => {
         }}
         fullWidth
       >
-        Login
+        Next
       </Button>
 
-      {/* Footer Links */}
       <Box display="flex" justifyContent="space-between" mt={2}>
         <Link href="#" variant="body2" color="text.secondary">
-          ¿Olvido su contraseña?
+          Forgot your password?
         </Link>
-        <Link href="#" variant="body2" sx={{ fontWeight: 'bold' }}>
-          Crear una cuenta
+        <Link href="#" variant="body2" sx={{ fontWeight: 'bold', color: 'black' }}>
+          Create an account
         </Link>
       </Box>
     </Box>
