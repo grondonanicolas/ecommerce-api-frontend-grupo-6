@@ -1,4 +1,3 @@
-// import './App.css';
 import EcommerceContainer from './components/EcommerceContainer';
 import Profile from './pages/profile/Profile';
 

@@ -8,7 +8,7 @@ import SearchBar from './SearchBar';
 const NavBar = () => {
   return (
     <AppBar
-      position="absolute"
+      position="static"
       elevation={0}
       sx={{ paddingTop: 2, paddingBottom: 2, backgroundColor: 'white' }}
     >

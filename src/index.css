@@ -1,3 +1,15 @@
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: auto;
+}
+
 :root {
   --font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   --primary-color: #242424;
@@ -16,12 +28,7 @@
 
   color-scheme: light dark;
   background-color: var(--secondary-color);
-
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
   text-align: center;
-  width: 100%;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -29,7 +36,6 @@
 }
 
 body {
-  margin: 0;
   font-family: var(--font-family);
   color: var(--text-color);
   background-color: white;
