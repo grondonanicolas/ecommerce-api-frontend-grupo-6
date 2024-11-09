@@ -8,7 +8,8 @@ import Historic from '../pages/user/historic/Historic';
 import Product from '../pages/products/product/Product';
 import Profile from '../pages/user/profile/Profile';
 import ProductAdmin from '../pages/admin/products/ProductAdmin';
-import ProtectedRoute from './ProtectedRoute';
+// import ProtectedRoute from './ProtectedRoute';
+import NotFound from '../pages/not-found/NotFound';
 import AuthWrapper from './AuthWrapper';
 import UserAdmin from '../pages/admin/users/UserAdmin';
 import EcommerceContainer from '../components/EcommerceContainer';
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
     element: <AuthWrapper />,
     children: [
       {
+        path: '*',
+        element: <NotFound />,
+      },
+      {
         path: '/signup',
         element: <SignUpPage />,
       },
@@ -90,7 +95,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/admin',
-        element: <ProtectedRoute requiredRole="ADMIN" />,
+        // element: <ProtectedRoute requiredRole="ADMIN" />,
         children: [
           {
             path: 'products',
@@ -123,7 +128,7 @@ const router = createBrowserRouter([
             ],
           },
           {
-            element: <ProtectedRoute requiredRole="USER" />,
+            // element: <ProtectedRoute requiredRole="USER" />,
             children: [
               {
                 path: '/cart',
