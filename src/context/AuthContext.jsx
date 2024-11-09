@@ -18,9 +18,9 @@ export function AuthProvider({ children }) {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const login = async (userName, password) => {
+  const login = async (email, password) => {
     try {
-      const { token, userData } = await authenticate(userName, password);
+      const { token, userData } = await authenticate(email, password);
 
       setUser(userData);
       setToken(token);
@@ -43,7 +43,7 @@ export function AuthProvider({ children }) {
     birthDate
   ) => {
     try {
-      const { token, userData } = await signupService(
+      const { access_token } = await signupService(
         userName,
         firstName,
         lastName,
@@ -52,13 +52,13 @@ export function AuthProvider({ children }) {
         birthDate
       );
 
-      if (!token || !userData) {
+      if (!access_token ) {
         throw new Error('Error en el registro. Intente de nuevo.');
       }
-      setUser(userData);
-      setToken(token);
-      localStorage.setItem('user', JSON.stringify(userData));
-      localStorage.setItem('token', token);
+      
+      setToken(access_token);
+      
+      localStorage.setItem('token', access_token);
 
       navigate('/home');
     } catch (err) {

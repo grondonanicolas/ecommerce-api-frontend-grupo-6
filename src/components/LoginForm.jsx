@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Box, TextField, Typography, Button, Link } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
+import { AuthContext } from '../context/AuthContext'; 
 
 const LoginForm = () => {
+  const { login, error } = useContext(AuthContext); //  función login del contexto
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -16,9 +18,13 @@ const LoginForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Login form submitted:', formData);
+    try {
+      await login(formData.email, formData.password); // Llama a login con los datos del formulario
+    } catch (err) {
+      console.error("Error al iniciar sesión:", err.message);
+    }
   };
 
   return (
@@ -38,6 +44,12 @@ const LoginForm = () => {
       <Typography variant="body1" color="text.secondary" gutterBottom>
         Please fill your information below
       </Typography>
+
+      {error && (
+        <Typography variant="body2" color="error">
+          {error}
+        </Typography>
+      )}
 
       <TextField
         name="email"
