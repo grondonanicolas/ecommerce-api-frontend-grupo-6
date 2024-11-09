@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
 import { Box } from '@mui/material';
 import NavBar from './NavBar';
 import Footer from './Footer';
+import { Outlet } from 'react-router-dom';
 
-const EcommerceContainer = ({ children }) => {
+const EcommerceContainer = () => {
   return (
     <Box
       sx={{
@@ -15,14 +15,12 @@ const EcommerceContainer = ({ children }) => {
       }}
     >
       <NavBar />
-      <Box sx={{ flexGrow: 1 }}>{children}</Box>
+      <Box sx={{ flexGrow: 1 }}>
+        <Outlet />
+      </Box>
       <Footer />
     </Box>
   );
-};
-
-EcommerceContainer.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default EcommerceContainer;

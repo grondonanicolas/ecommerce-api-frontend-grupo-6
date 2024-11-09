@@ -5,6 +5,7 @@ import { authenticate } from '../services/serviceLogin';
 import { signup as signupService } from '../services/serviceSignup';
 
 export const AuthContext = createContext();
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
     const savedUser = JSON.parse(localStorage.getItem('user'));
@@ -14,7 +15,6 @@ export function AuthProvider({ children }) {
   const [token, setToken] = useState(
     () => localStorage.getItem('token') || null
   );
-
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -52,12 +52,11 @@ export function AuthProvider({ children }) {
         birthDate
       );
 
-      if (!access_token ) {
+      if (!access_token) {
         throw new Error('Error en el registro. Intente de nuevo.');
       }
-      
+
       setToken(access_token);
-      
       localStorage.setItem('token', access_token);
 
       navigate('/home');
