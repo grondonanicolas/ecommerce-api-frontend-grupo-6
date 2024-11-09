@@ -4,7 +4,7 @@ import Router from './router/Router';
 const App = () => {
   return (
     <EcommerceContainer>
-      <Router />;
+      <Router />
     </EcommerceContainer>
   );
 };

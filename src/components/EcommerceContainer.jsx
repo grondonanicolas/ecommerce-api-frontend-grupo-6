@@ -11,6 +11,7 @@ const EcommerceContainer = ({ children }) => {
         display: 'flex',
         flex: 1,
         flexDirection: 'column',
+        backgroundColor: 'white',
       }}
     >
       <NavBar />

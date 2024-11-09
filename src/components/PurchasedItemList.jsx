@@ -17,7 +17,7 @@ const PurchasedItemList = ({ items, date, status }) => {
       sx={{
         margin: 5,
         padding: 2,
-        backgroundColor: '#F2F0F1',
+        backgroundColor: 'white',
         borderRadius: 1,
       }}
     >

@@ -5,8 +5,8 @@ const PurchasedItem = ({ purchasedItem }) => {
   return (
     <Card
       sx={{
-        minWidth: '1000px',
-        maxWidth: '1200px',
+        width: '1000px',
+        minWidth: '500px',
         padding: 0,
         boxShadow: 'none',
       }}
@@ -18,23 +18,24 @@ const PurchasedItem = ({ purchasedItem }) => {
               variant="rounded"
               alt={purchasedItem.name}
               src={purchasedItem.imageUrl}
-              sx={{ width: '300px', height: '300px', borderRadius: 2 }}
+              sx={{
+                minWidth: '100px',
+                minHeight: '100px',
+                maxHeight: '300px',
+                maxWidth: '300px',
+                borderRadius: 2,
+              }}
             />
           </Grid2>
           <Grid2 xs sx={{ pl: 2 }}>
             <Typography
-              variant="h4"
+              variant="h5"
               align="left"
               sx={{ fontWeight: 'bold', marginTop: 1 }}
             >
               {purchasedItem.name}
             </Typography>
-            <Typography
-              variant="body1"
-              color="textSecondary"
-              align="left"
-              sx={{ marginTop: 28 }}
-            >
+            <Typography variant="body1" color="textSecondary" align="left">
               Quantity: {purchasedItem.quantity}
             </Typography>
           </Grid2>
