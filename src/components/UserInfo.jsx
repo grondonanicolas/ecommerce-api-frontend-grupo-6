@@ -10,7 +10,7 @@ import {
 
 const UserInfo = ({ user }) => {
   return (
-    <Paper elevation={3} sx={{ maxWidth: 800, margin: 'auto' }}>
+    <Paper elevation={5} sx={{ maxWidth: 800, margin: 'auto' }}>
       <Card sx={{ fontWeight: 'bold' }}>
         <CardContent>
           <Grid2 container spacing={4} alignItems="center">

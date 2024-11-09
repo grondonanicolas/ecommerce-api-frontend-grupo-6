@@ -1,10 +1,8 @@
 import { Grid2 } from '@mui/material';
 import PurchasedItemList from '../../components//PurchasedItemList';
-import SearchBar from '../../components/SearchBar';
 import UserInfo from '../../components/UserInfo';
 
 const Home = () => {
-  console.log('GOLA');
   const purchasedItems = [
     {
       name: 'Skinny Fit Jeans',
