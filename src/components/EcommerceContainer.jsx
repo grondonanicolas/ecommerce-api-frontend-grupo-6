@@ -15,7 +15,7 @@ const EcommerceContainer = ({ children }) => {
       }}
     >
       <NavBar />
-      <Box sx={{ flexGrow: 1 }}>{children}</Box>
+      <Box sx={{ flexGrow: 1, alignContent: 'center' }}>{children}</Box>
       <Footer />
     </Box>
   );

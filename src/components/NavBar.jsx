@@ -5,7 +5,10 @@ import {
 } from '@mui/icons-material';
 import SearchBar from './SearchBar';
 
+// import { useNavigate } from 'react-router-dom';
+
 const NavBar = () => {
+  // const navigate = useNavigate();
   return (
     <AppBar
       position="static"
@@ -23,6 +26,9 @@ const NavBar = () => {
             fontWeight: 'bold',
             minWidth: '100px',
           }}
+          // onClick={() => {
+          //   navigate('/');
+          // }}
         >
           Sportify
         </Typography>

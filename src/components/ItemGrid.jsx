@@ -17,6 +17,8 @@ const ItemGrid = ({ items }) => {
           key={item.id}
           sx={{
             display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
             justifyContent: 'center',
             width: '100%',
           }}
@@ -25,6 +27,7 @@ const ItemGrid = ({ items }) => {
             imageUrl={item.imageUrl}
             title={item.title}
             price={item.price}
+            productId={item.id}
           />
         </Box>
       ))}
