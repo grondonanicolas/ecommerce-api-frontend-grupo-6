@@ -26,9 +26,6 @@ const Home = () => {
   return (
     <Grid2 container spacing={2} direction="column" className="App">
       <Grid2>
-        <SearchBar />
-      </Grid2>
-      <Grid2>
         <UserInfo user={user} />
       </Grid2>
       <Grid2>
