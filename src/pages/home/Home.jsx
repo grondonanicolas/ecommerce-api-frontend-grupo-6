@@ -1,5 +1,4 @@
 import { Grid2 } from '@mui/material';
-import Footer from '../../components/Footer';
 import PurchasedItemList from '../../components//PurchasedItemList';
 import SearchBar from '../../components/SearchBar';
 import UserInfo from '../../components/UserInfo';
@@ -38,9 +37,6 @@ const Home = () => {
           date="2021-09-01"
           status="Entregado"
         />
-      </Grid2>
-      <Grid2>
-        <Footer />
       </Grid2>
     </Grid2>
   );
