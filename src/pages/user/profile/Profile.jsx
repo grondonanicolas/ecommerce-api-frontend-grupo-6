@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 import { Container, Typography, Box } from '@mui/material';
-import UserInfo from '../../../components/UserInfo';
-import PurchasedItemList from '../../../components/PurchasedItemList';
+import UserInfo from '../../components/UserInfo';
+import PurchasedItemList from '../../components/PurchasedItemList';
 
 const Profile = ({ user, purchasedItemsHistory }) => {
   return (
     <>
-      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Container sx={{ backgroundColor: 'red', width: '100%' }}>
         <Box sx={{ mb: 4 }}>
           <UserInfo user={user} />
         </Box>

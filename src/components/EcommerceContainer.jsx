@@ -8,7 +8,6 @@ const EcommerceContainer = ({ children }) => {
     <Box
       sx={{
         width: '100%',
-        backgroundColor: 'red',
         display: 'flex',
         flex: 1,
         flexDirection: 'column',
