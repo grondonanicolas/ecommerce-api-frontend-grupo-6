@@ -10,18 +10,18 @@ import {
 
 const UserInfo = ({ user }) => {
   return (
-    <Paper elevation={3}>
-      <Card sx={{ maxWidth: 400, margin: 'auto', fontWeight: 'bold' }}>
+    <Paper elevation={5} sx={{ maxWidth: 800, margin: 'auto' }}>
+      <Card sx={{ fontWeight: 'bold' }}>
         <CardContent>
           <Grid2 container spacing={4} alignItems="center">
-            <Grid2 size={2}>
+            <Grid2 xs={2}>
               <Avatar
                 alt={user.name}
                 src={user.avatarUrl}
                 sx={{ width: 64, height: 64 }}
               />
             </Grid2>
-            <Grid2 size="grow">
+            <Grid2 xs>
               <Typography variant="h6">{user.name}</Typography>
               <Typography variant="body2" color="textSecondary">
                 {user.email}

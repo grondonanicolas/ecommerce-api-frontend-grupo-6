@@ -15,8 +15,7 @@ const PurchasedItemList = ({ items, date, status }) => {
   return (
     <Box
       sx={{
-        maxWidth: '1200px',
-        margin: 'auto',
+        margin: 5,
         padding: 2,
         backgroundColor: 'white',
         borderRadius: 1,
