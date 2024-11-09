@@ -1,4 +1,3 @@
-import React from 'react';
 import ImageComponent from '../../../components/ImageComponent';
 import SignupForm from '../../../components/SignupForm';
 import { Box } from '@mui/material';

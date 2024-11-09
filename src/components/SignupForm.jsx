@@ -4,7 +4,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
 import CakeIcon from '@mui/icons-material/Cake';
-import {AuthContext} from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext';
 
 const SignupForm = () => {
   const { signup, error } = useContext(AuthContext); // Usa la función signup del contexto
@@ -31,7 +31,7 @@ const SignupForm = () => {
 
     // Validación de contraseñas
     if (formData.password !== formData.confirmPassword) {
-      setLocalError("Passwords do not match.");
+      setLocalError('Passwords do not match.');
       return;
     }
 
@@ -46,7 +46,7 @@ const SignupForm = () => {
         formData.birthDate
       );
     } catch {
-      setLocalError("Error en el registro. Intente de nuevo.");
+      setLocalError('Error en el registro. Intente de nuevo.');
     }
   };
 
@@ -70,7 +70,7 @@ const SignupForm = () => {
 
       {/* Username */}
       <TextField
-        name="username"
+        name="userName"
         placeholder="Username"
         value={formData.userName}
         onChange={handleChange}
@@ -180,7 +180,7 @@ const SignupForm = () => {
 
       {/* Birthdate */}
       <TextField
-        name="birthdate"
+        name="birthDate"
         type="date"
         value={formData.birthDate}
         onChange={handleChange}

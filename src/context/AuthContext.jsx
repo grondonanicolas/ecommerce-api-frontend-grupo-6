@@ -6,7 +6,6 @@ import { signup as signupService } from '../services/serviceSignup';
 
 export const AuthContext = createContext();
 export function AuthProvider({ children }) {
- 
   const [user, setUser] = useState(() => {
     const savedUser = JSON.parse(localStorage.getItem('user'));
     return savedUser || null;
@@ -53,6 +52,9 @@ export function AuthProvider({ children }) {
         birthDate
       );
 
+      if (!token || !userData) {
+        throw new Error('Error en el registro. Intente de nuevo.');
+      }
       setUser(userData);
       setToken(token);
       localStorage.setItem('user', JSON.stringify(userData));
@@ -83,5 +85,3 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
-
-
