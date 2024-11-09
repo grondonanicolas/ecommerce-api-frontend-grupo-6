@@ -1,17 +1,23 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Box, TextField, Typography, Button, Link } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
+import CakeIcon from '@mui/icons-material/Cake';
+import { AuthContext } from '../context/AuthContext';
 
 const SignupForm = () => {
+  const { signup, error } = useContext(AuthContext); // Usa la función signup del contexto
   const [formData, setFormData] = useState({
+    userName: '',
     firstName: '',
     lastName: '',
     email: '',
     password: '',
     confirmPassword: '',
+    birthDate: '',
   });
+  const [localError, setLocalError] = useState(null);
 
   const handleChange = (e) => {
     setFormData({
@@ -20,9 +26,28 @@ const SignupForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+
+    // Validación de contraseñas
+    if (formData.password !== formData.confirmPassword) {
+      setLocalError('Passwords do not match.');
+      return;
+    }
+
+    try {
+      // Llama a la función signup de AuthContext
+      await signup(
+        formData.userName,
+        formData.firstName,
+        formData.lastName,
+        formData.email,
+        formData.password,
+        formData.birthDate
+      );
+    } catch {
+      setLocalError('Error en el registro. Intente de nuevo.');
+    }
   };
 
   return (
@@ -37,16 +62,35 @@ const SignupForm = () => {
       }}
     >
       <Typography variant="h4" fontWeight="bold" gutterBottom>
-        Registrarse
+        Sign Up
       </Typography>
       <Typography variant="body1" color="text.secondary" gutterBottom>
-        Por favor, complete los campos para registrarse.
+        Please fill your information below
       </Typography>
+
+      {/* Username */}
+      <TextField
+        name="userName"
+        placeholder="Username"
+        value={formData.userName}
+        onChange={handleChange}
+        variant="outlined"
+        fullWidth
+        InputProps={{
+          startAdornment: (
+            <AccountCircleIcon color="action" sx={{ marginRight: 1 }} />
+          ),
+        }}
+        sx={{
+          backgroundColor: 'grey.100',
+          borderRadius: '10px',
+        }}
+      />
 
       {/* First Name */}
       <TextField
         name="firstName"
-        placeholder="Nombre"
+        placeholder="First Name"
         value={formData.firstName}
         onChange={handleChange}
         variant="outlined"
@@ -62,9 +106,10 @@ const SignupForm = () => {
         }}
       />
 
+      {/* Last Name */}
       <TextField
         name="lastName"
-        placeholder="Apellido"
+        placeholder="Last Name"
         value={formData.lastName}
         onChange={handleChange}
         variant="outlined"
@@ -80,6 +125,7 @@ const SignupForm = () => {
         }}
       />
 
+      {/* Email */}
       <TextField
         name="email"
         placeholder="E-mail"
@@ -96,10 +142,11 @@ const SignupForm = () => {
         }}
       />
 
+      {/* Password */}
       <TextField
         name="password"
         type="password"
-        placeholder="Contraseña"
+        placeholder="Password"
         value={formData.password}
         onChange={handleChange}
         variant="outlined"
@@ -113,10 +160,11 @@ const SignupForm = () => {
         }}
       />
 
+      {/* Confirm Password */}
       <TextField
         name="confirmPassword"
         type="password"
-        placeholder="Confirmar Contraseña"
+        placeholder="Confirm Password"
         value={formData.confirmPassword}
         onChange={handleChange}
         variant="outlined"
@@ -130,12 +178,33 @@ const SignupForm = () => {
         }}
       />
 
+      {/* Birthdate */}
+      <TextField
+        name="birthDate"
+        type="date"
+        value={formData.birthDate}
+        onChange={handleChange}
+        variant="outlined"
+        fullWidth
+        InputLabelProps={{
+          shrink: true,
+        }}
+        InputProps={{
+          startAdornment: <CakeIcon color="action" sx={{ marginRight: 1 }} />,
+        }}
+        sx={{
+          backgroundColor: 'grey.100',
+          borderRadius: '10px',
+        }}
+      />
+
+      {/* Botón de envío */}
       <Button
         variant="contained"
         color="primary"
         onClick={handleSubmit}
         sx={{
-          borderRadius: '20px',
+          borderRadius: '10px',
           backgroundColor: 'black',
           color: 'white',
           padding: '10px',
@@ -145,19 +214,27 @@ const SignupForm = () => {
         }}
         fullWidth
       >
-        Registrarse
+        Register
       </Button>
 
+      {/* Muestra el error si existe */}
+      {(localError || error) && (
+        <Typography color="error" variant="body2" sx={{ mt: 1 }}>
+          {localError || error}
+        </Typography>
+      )}
+
+      {/* Enlaces de pie de página */}
       <Box display="flex" justifyContent="center" mt={2}>
         <Typography variant="body2" color="text.secondary">
-          ¿Ya tienes una cuenta?
+          Already have an account?
         </Typography>
         <Link
           href="#"
           variant="body2"
-          sx={{ marginLeft: 0.5, fontWeight: 'bold' }}
+          sx={{ marginLeft: 0.5, fontWeight: 'bold', color: 'black' }}
         >
-          Loguese aqui
+          Log in here
         </Link>
       </Box>
     </Box>

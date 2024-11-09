@@ -1,12 +1,18 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from '../pages/home/Home';
-import SignUp from '../pages/auth/register/SignUp';
-import Login from '../pages/auth/login/Login';
+import SignUpPage from '../pages/auth/register/SignUpPage';
+import LoginPage from '../pages/auth/login/LoginPage';
 import Cart from '../pages/cart/Cart';
 import Catalog from '../pages/products/catalog/Catalog';
 import Historic from '../pages/user/historic/Historic';
 import Product from '../pages/products/product/Product';
 import Profile from '../pages/user/profile/Profile';
+import ProductAdmin from '../pages/admin/products/ProductAdmin';
+// import ProtectedRoute from './ProtectedRoute';
+import NotFound from '../pages/not-found/NotFound';
+import AuthWrapper from './AuthWrapper';
+import UserAdmin from '../pages/admin/users/UserAdmin';
+import EcommerceContainer from '../components/EcommerceContainer';
 
 const deliveredExampleData = {
   date: '04 de Marzo',
@@ -73,49 +79,82 @@ const userData = {
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <Home />,
-  },
-  {
-    path: '/sign-up',
-    element: <SignUp />,
-  },
-  {
-    path: '/login',
-    element: <Login />,
-  },
-  {
-    path: '/cart',
-    element: <Cart />,
-  },
-  {
-    path: '/user',
+    element: <AuthWrapper />,
     children: [
       {
-        path: 'profile',
-        element: (
-          <Profile
-            purchasedItemsHistory={purchasedItemListExampleData}
-            user={userData}
-          />
-        ),
+        path: '*',
+        element: <NotFound />,
       },
       {
-        path: 'historic',
-        element: <Historic />,
-      },
-    ],
-  },
-  {
-    path: '/products',
-    children: [
-      {
-        path: 'catalog',
-        element: <Catalog />,
+        path: '/signup',
+        element: <SignUpPage />,
       },
       {
-        path: ':productId',
-        element: <Product />,
+        path: '/login',
+        element: <LoginPage />,
+      },
+      {
+        path: '/admin',
+        // element: <ProtectedRoute requiredRole="ADMIN" />,
+        children: [
+          {
+            path: 'products',
+            element: <ProductAdmin />,
+          },
+          {
+            path: 'users',
+            element: <UserAdmin />,
+          },
+        ],
+      },
+      {
+        element: <EcommerceContainer />,
+        children: [
+          {
+            path: '/',
+            element: <Home />,
+          },
+          {
+            path: '/products',
+            children: [
+              {
+                path: 'catalog',
+                element: <Catalog />,
+              },
+              {
+                path: ':productId',
+                element: <Product />,
+              },
+            ],
+          },
+          {
+            // element: <ProtectedRoute requiredRole="USER" />,
+            children: [
+              {
+                path: '/cart',
+                element: <Cart />,
+              },
+              {
+                path: '/user',
+                children: [
+                  {
+                    path: 'profile',
+                    element: (
+                      <Profile
+                        purchasedItemsHistory={purchasedItemListExampleData}
+                        user={userData}
+                      />
+                    ),
+                  },
+                  {
+                    path: 'historic',
+                    element: <Historic />,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
       },
     ],
   },
