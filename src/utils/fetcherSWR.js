@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export const FetcherSWR = async ({ url, options }) => {
   if (!url) {
     return;
@@ -12,7 +14,7 @@ export const FetcherSWR = async ({ url, options }) => {
   };
 
   const response = await axios({
-    url,
+    url: `${API_URL}/${url}`,
     headers,
     method: options?.method || 'get',
     ...options,
