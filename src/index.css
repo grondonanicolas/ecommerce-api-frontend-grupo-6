@@ -61,6 +61,9 @@ h5,
 h6 {
   color: var(--heading-color);
   margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  /* Removimos display: flex y place-items para evitar conflictos de diseño */
 }
 
 h1 {
