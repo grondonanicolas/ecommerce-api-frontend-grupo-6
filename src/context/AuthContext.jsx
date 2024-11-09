@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { authenticate } from '../services/serviceLogin';
 import { signup as signupService } from '../services/serviceSignup';
 
-export function AuthContext({ children }) {
-  const Context = createContext();
+export const AuthContext = createContext();
+export function AuthProvider({ children }) {
+ 
   const [user, setUser] = useState(() => {
     const savedUser = JSON.parse(localStorage.getItem('user'));
     return savedUser || null;
@@ -18,9 +19,9 @@ export function AuthContext({ children }) {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const login = async (username, password) => {
+  const login = async (userName, password) => {
     try {
-      const { token, userData } = await authenticate(username, password);
+      const { token, userData } = await authenticate(userName, password);
 
       setUser(userData);
       setToken(token);
@@ -35,21 +36,21 @@ export function AuthContext({ children }) {
   };
 
   const signup = async (
-    username,
+    userName,
     firstName,
     lastName,
     email,
     password,
-    birthdate
+    birthDate
   ) => {
     try {
       const { token, userData } = await signupService(
-        username,
+        userName,
         firstName,
         lastName,
         email,
         password,
-        birthdate
+        birthDate
       );
 
       setUser(userData);
@@ -77,10 +78,10 @@ export function AuthContext({ children }) {
   }, [user]);
 
   return (
-    <Context.Provider value={{ user, token, login, signup, logout, error }}>
+    <AuthContext.Provider value={{ user, token, login, signup, logout, error }}>
       {children}
-    </Context.Provider>
+    </AuthContext.Provider>
   );
 }
 
-export default AuthContext;
+

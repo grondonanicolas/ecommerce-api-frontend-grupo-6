@@ -1,14 +1,14 @@
-import api from './Api';
+import api from './api';
 
-export const signup = async (username, firstName, lastName, email, password, birthdate) => {
-  const response = await api.post('/signup', {
-    username,
+export const signup = async (userName, firstName, lastName, email, password, birthDate) => {
+  const response = await api.post("http://localhost:8080/register", {
+    userName,
     firstName,
     lastName,
     email,
     password,
-    birthdate,
-    role: 'USER' // Asegura que el rol es siempre USER
+    birthDate,
+    role: 'USER' 
   });
   
   return response.data;

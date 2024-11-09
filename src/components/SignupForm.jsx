@@ -4,18 +4,18 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
 import CakeIcon from '@mui/icons-material/Cake';
-import AuthContext from '../context/AuthContext';
+import {AuthContext} from '../context/AuthContext';
 
 const SignupForm = () => {
   const { signup, error } = useContext(AuthContext); // Usa la función signup del contexto
   const [formData, setFormData] = useState({
-    username: '',
+    userName: '',
     firstName: '',
     lastName: '',
     email: '',
     password: '',
     confirmPassword: '',
-    birthdate: '',
+    birthDate: '',
   });
   const [localError, setLocalError] = useState(null);
 
@@ -38,12 +38,12 @@ const SignupForm = () => {
     try {
       // Llama a la función signup de AuthContext
       await signup(
-        formData.username,
+        formData.userName,
         formData.firstName,
         formData.lastName,
         formData.email,
         formData.password,
-        formData.birthdate
+        formData.birthDate
       );
     } catch {
       setLocalError("Error en el registro. Intente de nuevo.");
@@ -72,7 +72,7 @@ const SignupForm = () => {
       <TextField
         name="username"
         placeholder="Username"
-        value={formData.username}
+        value={formData.userName}
         onChange={handleChange}
         variant="outlined"
         fullWidth
@@ -182,7 +182,7 @@ const SignupForm = () => {
       <TextField
         name="birthdate"
         type="date"
-        value={formData.birthdate}
+        value={formData.birthDate}
         onChange={handleChange}
         variant="outlined"
         fullWidth

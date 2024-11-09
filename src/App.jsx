@@ -4,7 +4,7 @@ import {
   Route,
   Navigate,
 } from 'react-router-dom';
-import AuthContext from './context/AuthContext';
+import {AuthProvider} from './context/AuthContext';
 import HomePage from './pages/home/Home';
 import LoginPage from './pages/auth/login/LoginPage';
 import SignUpPage from './pages/auth/register/SignUpPage';
@@ -12,7 +12,7 @@ import SignUpPage from './pages/auth/register/SignUpPage';
 function App() {
   return (
     <Router>
-      <AuthContext>
+      <AuthProvider>
         <Routes>
           <Route path="/" element={<Navigate to="/home" />} />{' '}
           {/* Redirección a home */}
@@ -20,7 +20,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<SignUpPage />} />
         </Routes>
-      </AuthContext>
+      </AuthProvider>
     </Router>
   );
 }
