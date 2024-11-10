@@ -43,7 +43,7 @@ export function AuthProvider({ children }) {
       localStorage.setItem('user', JSON.stringify(userData));
       localStorage.setItem('token', token);
 
-      navigate('/home');
+      navigate('/');
     } catch (err) {
       console.error(err);
       setError(err.message || 'Credenciales incorrectas');
@@ -77,7 +77,7 @@ export function AuthProvider({ children }) {
       setToken(access_token);
       localStorage.setItem('token', access_token);
 
-      navigate('/home');
+      navigate('/');
     } catch (err) {
       console.error(err);
       setError(err.message || 'Error en el registro. Intente de nuevo.');

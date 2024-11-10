@@ -4,11 +4,11 @@ import Router from './router/Router';
 
 const App = () => {
   return (
-    <EcommerceContainer>
+  //  <EcommerceContainer>
       <FavouritesContextProvider>
         <Router />
       </FavouritesContextProvider>
-    </EcommerceContainer>
+  //  </EcommerceContainer>
   );
 };
 
