@@ -6,11 +6,13 @@ const FetcherSWR = async ({ url, options }) => {
   if (!url) {
     return;
   }
+  console.log('entra');
 
   const bearerToken = window.localStorage.getItem('token');
 
   const headers = {
     Authorization: `Bearer ${bearerToken}`,
+    'Content-Type': 'application/json',
   };
 
   const response = await axios({

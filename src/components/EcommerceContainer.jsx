@@ -15,7 +15,7 @@ const EcommerceContainer = () => {
       }}
     >
       <NavBar />
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1, alignContent: 'center' }}>
         <Outlet />
       </Box>
       <Footer />

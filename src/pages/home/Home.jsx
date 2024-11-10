@@ -1,39 +1,26 @@
-import { Grid2 } from '@mui/material';
-import PurchasedItemList from '../../components//PurchasedItemList';
+import { Box, Grid, Grid2, Stack } from '@mui/material';
 import UserInfo from '../../components/UserInfo';
+import ProductsOutstanding from '../../components/ProductsOutstanding';
+import ProductsHistoric from '../../components/UserProductsHistoric';
 
 const Home = () => {
-  const purchasedItems = [
-    {
-      name: 'Skinny Fit Jeans',
-      imageUrl: 'https://via.placeholder.com/100',
-      quantity: 1,
-    },
-    {
-      name: 'T-shirt with Tape Details',
-      imageUrl: 'https://via.placeholder.com/100',
-      quantity: 1,
-    },
-  ];
-
-  const user = {
-    name: 'John Doe',
-    avatarUrl: 'https://via.placeholder.com/100',
-    email: 'john@email.com',
-  };
+  // const user = {
+  //   name: 'John Doe',
+  //   avatarUrl: 'https://via.placeholder.com/100',
+  //   email: 'john@email.com',
+  // };
   return (
-    <Grid2 container spacing={2} direction="column" className="App">
-      <Grid2>
+    <Stack container spacing={6} direction="column" className="App" gap={8}>
+      {/* <Box>
         <UserInfo user={user} />
-      </Grid2>
-      <Grid2>
-        <PurchasedItemList
-          items={purchasedItems}
-          date="2021-09-01"
-          status="Entregado"
-        />
-      </Grid2>
-    </Grid2>
+      </Box> */}
+      <Box>
+        <ProductsOutstanding />
+      </Box>
+      <Box>
+        <ProductsHistoric />
+      </Box>
+    </Stack>
   );
 };
 
