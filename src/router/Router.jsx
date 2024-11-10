@@ -7,6 +7,7 @@ import Catalog from '../pages/products/catalog/Catalog';
 import Historic from '../pages/user/historic/Historic';
 import Product from '../pages/products/product/Product';
 import Profile from '../pages/user/profile/Profile';
+import ProductAdminBoard from '../pages/admin/products/ProductAdminBoard';
 import ProductAdmin from '../pages/admin/products/ProductAdmin';
 // import ProtectedRoute from './ProtectedRoute';
 import NotFound from '../pages/not-found/NotFound';
@@ -99,6 +100,10 @@ const router = createBrowserRouter([
         element: <AdminContainer />,
         // element: <ProtectedRoute requiredRole="ADMIN" />,
         children: [
+          {
+            path: 'products',
+            element: <ProductAdminBoard/>,
+          },
           {
             path: 'products/:productId',
             element: <ProductAdmin />,

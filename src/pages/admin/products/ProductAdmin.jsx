@@ -40,6 +40,7 @@ const ProductAdmin = () => {
           category={data.category}
           state={data.state}
           productId={data.id}
+          initialStatus={data.state}
         />
       </Box>
     );
