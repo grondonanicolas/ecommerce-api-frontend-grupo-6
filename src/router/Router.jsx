@@ -13,6 +13,7 @@ import NotFound from '../pages/not-found/NotFound';
 import AuthWrapper from './AuthWrapper';
 import UserAdmin from '../pages/admin/users/UserAdmin';
 import EcommerceContainer from '../components/EcommerceContainer';
+import AdminContainer from '../components/AdminContainer';
 
 const deliveredExampleData = {
   date: '04 de Marzo',
@@ -95,10 +96,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/admin',
+        element: <AdminContainer />,
         // element: <ProtectedRoute requiredRole="ADMIN" />,
         children: [
           {
-            path: 'products',
+            path: 'products/:productId',
             element: <ProductAdmin />,
           },
           {
