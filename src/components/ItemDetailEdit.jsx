@@ -8,10 +8,6 @@ import {
   Divider,
   Typography,
   TextField,
-  MenuItem,
-  Select,
-  InputLabel,
-  FormControl,
   Snackbar,
   Alert,
 } from '@mui/material';
@@ -22,12 +18,6 @@ import FetcherSWR from '../utils/fetcherSWR';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-const statusEnum = {
-  DRAFT: 'DRAFT',
-  ACTIVE: 'ACTIVE',
-  REMOVED: 'REMOVED',
-};
-
 const ItemDetailEdit = ({
   imageUrl,
   descripcion,
@@ -37,6 +27,7 @@ const ItemDetailEdit = ({
   category,
   productId,
 }) => {
+  const [editTitle, setEditTitle] = useState(title);
   const [editDescription, setEditDescription] = useState(descripcion);
   const [editPrice, setEditPrice] = useState(price);
   const [editStock, setEditStock] = useState(stock);
@@ -58,8 +49,8 @@ const ItemDetailEdit = ({
 
   const handleUpdateProduct = async () => {
     const productUpdateDTO = {
+      name: editTitle,
       description: editDescription,
-      name: title,
       price: editPrice,
       stock: editStock,
       categoryId: editCategory ? parseInt(editCategory, 10) : null,
@@ -128,8 +119,16 @@ const ItemDetailEdit = ({
         <Grid item xs={12} md={4} lg={5}>
           <Box sx={{ p: 2 }}>
             <Typography variant="h5" component="h1" sx={{ fontWeight: 400, mb: 2 }}>
-              {title || 'Producto sin título'}
+              Editar Producto
             </Typography>
+
+            <TextField
+              label="Título"
+              value={editTitle}
+              onChange={(e) => setEditTitle(e.target.value)}
+              fullWidth
+              sx={{ mb: 2 }}
+            />
 
             <TextField
               label="Descripción"
