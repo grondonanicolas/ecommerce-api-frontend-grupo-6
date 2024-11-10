@@ -5,6 +5,6 @@ export const authenticate = async (email, password) => {
     email,
     password,
   });
-  const { token, ...userData } = response.data;
-  return { token, userData };
+  const token = response.data.access_token
+  return { token };
 };
