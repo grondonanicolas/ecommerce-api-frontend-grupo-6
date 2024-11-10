@@ -98,7 +98,7 @@ const router = createBrowserRouter([
         // element: <ProtectedRoute requiredRole="ADMIN" />,
         children: [
           {
-            path: 'products',
+            path: 'products/:productId',
             element: <ProductAdmin />,
           },
           {
