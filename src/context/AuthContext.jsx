@@ -3,6 +3,7 @@ import { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authenticate } from '../services/serviceLogin';
 import { signup as signupService } from '../services/serviceSignup';
+import { jwtDecode } from "jwt-decode";
 
 export const AuthContext = createContext();
 
@@ -20,7 +21,22 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     try {
-      const { token, userData } = await authenticate(email, password);
+      const { token } = await authenticate(email, password);
+
+      if (typeof token !== 'string') {
+        console.error("Invalid token:", token);
+        return;
+    }
+
+      const decodedToken = jwtDecode(token);
+
+      const userData = {
+        firstName: decodedToken.firstName,
+        lastName: decodedToken.lastName,
+        email: decodedToken.email,
+        role: decodedToken.role,
+        image: decodedToken.image,
+      };
 
       setUser(userData);
       setToken(token);
@@ -40,7 +56,8 @@ export function AuthProvider({ children }) {
     lastName,
     email,
     password,
-    birthDate
+    birthDate,
+    image
   ) => {
     try {
       const { access_token } = await signupService(
@@ -49,7 +66,8 @@ export function AuthProvider({ children }) {
         lastName,
         email,
         password,
-        birthDate
+        birthDate,
+        image
       );
 
       if (!access_token) {
