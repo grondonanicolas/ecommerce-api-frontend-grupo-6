@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useSWR, { mutate } from 'swr';
 import {
   Button,
@@ -10,10 +10,15 @@ import {
   TextField,
   Snackbar,
   Alert,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useNavigate } from 'react-router-dom';
 import FetcherSWR from '../utils/fetcherSWR';
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -26,14 +31,17 @@ const ItemDetailEdit = ({
   stock,
   category,
   productId,
+  initialStatus,
 }) => {
+  const navigate = useNavigate();
   const [editTitle, setEditTitle] = useState(title);
   const [editDescription, setEditDescription] = useState(descripcion);
   const [editPrice, setEditPrice] = useState(price);
   const [editStock, setEditStock] = useState(stock);
-  const [editCategory, setEditCategory] = useState(category);
   const [editImageUrl, setEditImageUrl] = useState(imageUrl);
-
+  const [imageError, setImageError] = useState(false);
+  const [editStatus, setEditStatus] = useState(initialStatus);
+  const [editCategoryId, setEditCategoryId] = useState(null);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [snackbarSeverity, setSnackbarSeverity] = useState('success');
@@ -42,10 +50,19 @@ const ItemDetailEdit = ({
     setOpenSnackbar(false);
   };
 
-  const { data, error } = useSWR(
-    { url: `products/${productId}`, options: { method: 'get' } },
+  const { data: categories, error: categoriesError } = useSWR(
+    { url: 'category', options: { method: 'get' } },
     FetcherSWR
   );
+
+  useEffect(() => {
+    if (categories && category) {
+      const selectedCategory = categories.find((cat) => cat.category === category);
+      if (selectedCategory) {
+        setEditCategoryId(selectedCategory.id);
+      }
+    }
+  }, [categories, category]);
 
   const handleUpdateProduct = async () => {
     const productUpdateDTO = {
@@ -53,10 +70,11 @@ const ItemDetailEdit = ({
       description: editDescription,
       price: editPrice,
       stock: editStock,
-      categoryId: editCategory ? parseInt(editCategory, 10) : null,
+      categoryId: editCategoryId,
       image: editImageUrl,
+      state: editStatus,
     };
-
+  
     try {
       await mutate(
         { url: `products/${productId}`, options: { method: 'put', data: productUpdateDTO } },
@@ -64,14 +82,18 @@ const ItemDetailEdit = ({
       );
       setSnackbarMessage('Producto actualizado con éxito');
       setSnackbarSeverity('success');
+      setOpenSnackbar(true);
+  
+      setTimeout(() => {
+        navigate('/admin/products');
+      }, 1000);
     } catch (error) {
       setSnackbarMessage('Error al actualizar el producto');
       setSnackbarSeverity('error');
-    } finally {
       setOpenSnackbar(true);
     }
   };
-
+  
   const handleDeleteProduct = async () => {
     try {
       await mutate(
@@ -80,13 +102,18 @@ const ItemDetailEdit = ({
       );
       setSnackbarMessage('Producto eliminado con éxito');
       setSnackbarSeverity('success');
+      setOpenSnackbar(true);
+  
+      setTimeout(() => {
+        navigate('/admin/products');
+      }, 1000);
     } catch (error) {
       setSnackbarMessage('Error al eliminar el producto');
       setSnackbarSeverity('error');
-    } finally {
       setOpenSnackbar(true);
     }
   };
+  
 
   return (
     <Paper
@@ -102,17 +129,24 @@ const ItemDetailEdit = ({
     >
       <Grid container spacing={3} sx={{ p: 2 }}>
         <Grid item xs={12} md={8} lg={7}>
-          <Box sx={{ position: 'relative', height: '100%' }}>
-            <img
-              src={imageUrl}
-              alt={title || 'Producto'}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                borderRadius: '8px',
-              }}
-            />
+          <Box sx={{ position: 'relative', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            {imageError ? (
+              <Typography variant="h6" color="text.secondary">
+                Sin imagen
+              </Typography>
+            ) : (
+              <img
+                src={editImageUrl}
+                alt={title || 'Producto'}
+                onError={() => setImageError(true)}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  borderRadius: '8px',
+                }}
+              />
+            )}
           </Box>
         </Grid>
 
@@ -157,22 +191,49 @@ const ItemDetailEdit = ({
               sx={{ mb: 2 }}
             />
 
-            <TextField
-              label="Categoría"
-              value={editCategory}
-              onChange={(e) => setEditCategory(e.target.value)}
-              type="number"
-              fullWidth
-              sx={{ mb: 2 }}
-            />
+            <FormControl fullWidth sx={{ mb: 2 }}>
+              <InputLabel>Categoría</InputLabel>
+              <Select
+                value={editCategoryId || ''}
+                onChange={(e) => setEditCategoryId(e.target.value)}
+                label="Categoría"
+              >
+                {categoriesError ? (
+                  <MenuItem disabled>Error al cargar categorías</MenuItem>
+                ) : categories ? (
+                  categories.map((cat) => (
+                    <MenuItem key={cat.id} value={cat.id}>
+                      {cat.category}
+                    </MenuItem>
+                  ))
+                ) : (
+                  <MenuItem disabled>Cargando categorías...</MenuItem>
+                )}
+              </Select>
+            </FormControl>
 
             <TextField
               label="URL de la Imagen"
               value={editImageUrl}
-              onChange={(e) => setEditImageUrl(e.target.value)}
+              onChange={(e) => {
+                setEditImageUrl(e.target.value);
+                setImageError(false);
+              }}
               fullWidth
               sx={{ mb: 2 }}
             />
+
+            <FormControl fullWidth sx={{ mb: 2 }}>
+              <InputLabel>Estado</InputLabel>
+              <Select
+                value={editStatus}
+                onChange={(e) => setEditStatus(e.target.value)}
+                label="Estado"
+              >
+                <MenuItem value="DRAFT">Borrador</MenuItem>
+                <MenuItem value="ACTIVE">Activo</MenuItem>
+              </Select>
+            </FormControl>
 
             <Divider sx={{ my: 2 }} />
 
@@ -240,6 +301,7 @@ ItemDetailEdit.propTypes = {
   stock: PropTypes.number.isRequired,
   descripcion: PropTypes.string.isRequired,
   productId: PropTypes.number.isRequired,
+  initialStatus: PropTypes.string.isRequired,
 };
 
 export default ItemDetailEdit;

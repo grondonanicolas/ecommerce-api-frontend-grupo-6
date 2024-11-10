@@ -6,37 +6,80 @@ import {
   Typography,
   Box,
   Button,
+  Chip,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
-const Item = ({ imageUrl, title, price, productId }) => {
+const Item = ({ imageUrl, title, price, state, productId }) => {
   const navigate = useNavigate();
+  const [imageError, setImageError] = useState(false);
 
   const handleNavigateProducto = () => {
-    navigate(`/products/${productId}`);
+    const targetPath = state ? `/admin/products/${productId}` : `/products/${productId}`;
+    navigate(targetPath);
+  };
+
+  const renderStateLabel = () => {
+    if (!state) return null;
+    return (
+      <Chip
+        label={state === 'ACTIVE' ? 'Activo' : 'Borrador'}
+        color={state === 'ACTIVE' ? 'success' : 'default'}
+        sx={{ mt: 1 }}
+      />
+    );
   };
 
   return (
-    <Card
-      elevation="0"
-      sx={{ width: 250, borderRadius: '12px 12px 12px 12px' }}
-    >
-      <CardMedia
-        component="img"
-        height="300"
-        image={imageUrl}
-        alt={title}
-        sx={{ borderRadius: '12px' }}
-      />
+    <Card elevation={0} sx={{ width: 250, borderRadius: '12px' }}>
+      {imageError ? (
+        <Box
+          height="300px"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          sx={{ backgroundColor: 'grey.300', borderRadius: '12px' }}
+        >
+          <Typography variant="h6" color="text.secondary">
+            Sin imagen
+          </Typography>
+        </Box>
+      ) : (
+        <CardMedia
+          component="img"
+          height="300"
+          image={imageUrl}
+          alt={title}
+          onError={() => setImageError(true)}
+          sx={{ borderRadius: '12px' }}
+        />
+      )}
       <CardContent>
         <Box display="flex" flexDirection="column" alignItems="left">
           <Typography noWrap variant="body1" fontWeight="bold">
             {title}
           </Typography>
-          <Typography variant="h6" color="text.secondary">
-            ${price}
-          </Typography>
-          <Button onClick={handleNavigateProducto}>Ver más</Button>
+          {price !== undefined ? (
+            <Typography variant="h6" color="text.secondary">
+              ${price}
+            </Typography>
+          ) : (
+            renderStateLabel()
+          )}
+          <Button
+            onClick={handleNavigateProducto}
+            sx={{
+              mt: 1,
+              backgroundColor: state ? 'primary.main' : 'secondary.main',
+              color: 'white',
+              '&:hover': {
+                backgroundColor: state ? 'primary.light' : 'secondary.light',
+              },
+            }}
+          >
+            {state ? 'Editar' : 'Ver más'}
+          </Button>
         </Box>
       </CardContent>
     </Card>
@@ -46,7 +89,8 @@ const Item = ({ imageUrl, title, price, productId }) => {
 Item.propTypes = {
   title: PropTypes.string.isRequired,
   imageUrl: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
+  price: PropTypes.number,
+  state: PropTypes.string,
   productId: PropTypes.string.isRequired,
 };
 
