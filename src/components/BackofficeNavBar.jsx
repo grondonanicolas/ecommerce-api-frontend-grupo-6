@@ -1,12 +1,10 @@
 import { AppBar, Toolbar, Typography, IconButton, Box } from '@mui/material';
-import {
-  AccountCircle as AccountCircleIcon,
-  Inventory as InventoryIcon,
-  People as PeopleIcon,
-} from '@mui/icons-material';
-import SearchBar from './SearchBar';
+import { AccountCircle as AccountCircleIcon } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const BackofficeNavBar = () => {
+  const navigate = useNavigate();
+
   return (
     <AppBar
       position="static"
@@ -42,8 +40,8 @@ const BackofficeNavBar = () => {
               alignItems: 'center',
               cursor: 'pointer',
             }}
+            onClick={() => navigate('/admin/products')}
           >
-            <InventoryIcon color="black" sx={{ marginRight: 1 }} />
             <Typography color="black" variant="body1">
               Productos
             </Typography>
@@ -54,8 +52,20 @@ const BackofficeNavBar = () => {
               alignItems: 'center',
               cursor: 'pointer',
             }}
+            onClick={() => navigate('/admin/categories')}
           >
-            <PeopleIcon color="black" sx={{ marginRight: 1 }} />
+            <Typography color="black" variant="body1">
+              Categorías
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              cursor: 'pointer',
+            }}
+            onClick={() => navigate('/admin/users')}
+          >
             <Typography color="black" variant="body1">
               Usuarios
             </Typography>
