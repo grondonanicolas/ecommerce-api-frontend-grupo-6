@@ -25,7 +25,7 @@ const CategoryGrid = () => {
 
   if (categories) {
     return (
-      <>
+      <Box marginTop={5} marginBottom={6}>
         <Box marginBottom={5}>
           <Typography
             variant="h4"
@@ -78,7 +78,7 @@ const CategoryGrid = () => {
             </Box>
           ))}
         </Box>
-      </>
+      </Box>
     );
   }
 };

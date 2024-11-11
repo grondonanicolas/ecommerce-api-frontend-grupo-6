@@ -167,7 +167,7 @@ const ItemDetail = ({
                     backgroundColor: 'rgba(255, 255, 255, 0.9)',
                   },
                 }}
-                onClick={handleFavourite}
+                onClick={()=> handleFavourite()}
               >
                 {isFavourite ? <StarIcon /> : <StarBorderIcon />}
               </IconButton>
