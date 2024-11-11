@@ -8,6 +8,7 @@ import Historic from '../pages/user/historic/Historic';
 import Product from '../pages/products/product/Product';
 import Profile from '../pages/user/profile/Profile';
 import ProductAdminBoard from '../pages/admin/products/ProductAdminBoard';
+import ProductCreate from '../pages/admin/products/ProductCreate';
 import ProductAdmin from '../pages/admin/products/ProductAdmin';
 // import ProtectedRoute from './ProtectedRoute';
 import NotFound from '../pages/not-found/NotFound';
@@ -105,6 +106,10 @@ const router = createBrowserRouter([
           {
             path: 'products',
             element: <ProductAdminBoard />,
+          },
+          {
+            path: 'products/create',
+            element: <ProductCreate />,
           },
           {
             path: 'products/:productId',
