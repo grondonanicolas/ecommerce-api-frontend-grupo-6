@@ -20,7 +20,7 @@ const Product = () => {
 
   useEffect(() => {
     if (!productId) return;
-    AddProductToHistoric(productId)
+    AddProductToHistoric(productId);
   }, [productId]);
 
   if (isLoading) {

@@ -6,7 +6,11 @@ import FetcherSWR from '../utils/fetcherSWR';
 export const FavouritesContext = createContext();
 
 function FavouritesContextProvider({ children }) {
-  const { data: favourites, error, isLoading } = useSWR(
+  const {
+    data: favourites,
+    error,
+    isLoading,
+  } = useSWR(
     {
       url: 'users/favourite',
     },

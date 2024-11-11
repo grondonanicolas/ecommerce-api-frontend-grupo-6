@@ -5,16 +5,19 @@ import ItemGrid from '../../../components/ItemGrid';
 import ItemFilterBar from '../../../components/ItemFilterBar';
 import { useEffect, useState } from 'react';
 import ItemGridSkeleton from '../../../components/skeletons/ItemGridSkeleton';
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom';
 
 const Catalog = () => {
-
   const [searchParams] = useSearchParams();
   const category = searchParams.get('category');
 
   const [fileteredProducts, setFilteredProducts] = useState([]);
 
-  const {data: products, error, isLoading} = useSWR(
+  const {
+    data: products,
+    error,
+    isLoading,
+  } = useSWR(
     {
       url: `products`,
     },
@@ -28,11 +31,11 @@ const Catalog = () => {
     FetcherSWR
   );
 
-  useEffect(()=>{
-    if(category && products){
+  useEffect(() => {
+    if (category && products) {
       setFilteredProducts(products.filter((p) => p.category === category));
     }
-  }, [category, products])
+  }, [category, products]);
 
   const handleFilterByCategory = (categoryFilter) => {
     setFilteredProducts(products.filter((p) => p.category === categoryFilter));
@@ -49,10 +52,20 @@ const Catalog = () => {
   return (
     <Box sx={{ width: '90%', margin: '0 auto' }}>
       <Box marginBottom={3}>
-        {categories && <ItemFilterBar itemCategories={categories} category={category} onHandleFilterByCategory={handleFilterByCategory} />}
+        {categories && (
+          <ItemFilterBar
+            itemCategories={categories}
+            category={category}
+            onHandleFilterByCategory={handleFilterByCategory}
+          />
+        )}
       </Box>
       <Box>
-        {fileteredProducts?.length > 0 ? <ItemGrid items={fileteredProducts} /> : <ItemGrid items={products} />}
+        {fileteredProducts?.length > 0 ? (
+          <ItemGrid items={fileteredProducts} />
+        ) : (
+          <ItemGrid items={products} />
+        )}
       </Box>
     </Box>
   );

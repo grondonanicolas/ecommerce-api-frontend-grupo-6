@@ -19,7 +19,11 @@ import { FavouritesContext } from '../context/FavouritesContext';
 const sizes = ['XS', 'S', 'M', 'L', 'XL'];
 
 const ItemDetail = ({
-  imageUrl= ["https://i.blogs.es/0ca9a6/aa/1366_2000.jpeg", "https://next-images.123rf.com/index/_next/image/?url=https://assets-cdn.123rf.com/index/static/assets/top-section-bg.jpeg&w=3840&q=75", "https://media.istockphoto.com/id/636379014/es/foto/manos-la-formaci%C3%B3n-de-una-forma-de-coraz%C3%B3n-con-silueta-al-atardecer.jpg?s=612x612&w=0&k=20&c=R2BE-RgICBnTUjmxB8K9U0wTkNoCKZRi-Jjge8o_OgE="],
+  imageUrl = [
+    'https://i.blogs.es/0ca9a6/aa/1366_2000.jpeg',
+    'https://next-images.123rf.com/index/_next/image/?url=https://assets-cdn.123rf.com/index/static/assets/top-section-bg.jpeg&w=3840&q=75',
+    'https://media.istockphoto.com/id/636379014/es/foto/manos-la-formaci%C3%B3n-de-una-forma-de-coraz%C3%B3n-con-silueta-al-atardecer.jpg?s=612x612&w=0&k=20&c=R2BE-RgICBnTUjmxB8K9U0wTkNoCKZRi-Jjge8o_OgE=',
+  ],
   title,
   price = 0,
   stock,
@@ -81,12 +85,12 @@ const ItemDetail = ({
     >
       <Grid container spacing={3} sx={{ p: 2 }}>
         <Grid item xs={12} md={8} lg={7}>
-          <Box 
-            sx={{ 
+          <Box
+            sx={{
               display: 'flex',
               gap: 2,
               position: 'relative',
-              height: '100%'
+              height: '100%',
             }}
           >
             {/* Carrusel vertical de miniaturas - solo se muestra si hay más de una imagen */}
@@ -107,14 +111,17 @@ const ItemDetail = ({
                       width: 60,
                       height: 60,
                       cursor: 'pointer',
-                      border: index === selectedImageIndex ? '2px solid #3483fa' : '1px solid lightgray',
+                      border:
+                        index === selectedImageIndex
+                          ? '2px solid #3483fa'
+                          : '1px solid lightgray',
                       borderRadius: 1,
                       overflow: 'hidden',
                       opacity: index === selectedImageIndex ? 1 : 0.7,
                       transition: 'all 0.2s ease-in-out',
                       '&:hover': {
                         opacity: 1,
-                      }
+                      },
                     }}
                   >
                     <img
@@ -306,7 +313,7 @@ const ItemDetail = ({
 ItemDetail.propTypes = {
   imageUrl: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string)
+    PropTypes.arrayOf(PropTypes.string),
   ]).isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,

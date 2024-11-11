@@ -3,11 +3,15 @@
 import ItemGrid from '../../../components/ItemGrid';
 import { Box, Typography } from '@mui/material';
 import ItemGridSkeleton from '../../../components/skeletons/ItemGridSkeleton';
-import useSWR from 'swr'
-import FetcherSWR from '../../../utils/fetcherSWR'
+import useSWR from 'swr';
+import FetcherSWR from '../../../utils/fetcherSWR';
 
 export default function Favourites() {
-  const { data: favourites, error, isLoading } = useSWR(
+  const {
+    data: favourites,
+    error,
+    isLoading,
+  } = useSWR(
     {
       url: 'users/favourite',
     },
@@ -29,7 +33,12 @@ export default function Favourites() {
   return (
     <>
       <Box marginBottom={5}>
-        <Typography variant="h4" fontWeight="bold" gutterBottom justifyContent={'center'}>
+        <Typography
+          variant="h4"
+          fontWeight="bold"
+          gutterBottom
+          justifyContent={'center'}
+        >
           Favoritos
         </Typography>
       </Box>
@@ -39,7 +48,9 @@ export default function Favourites() {
           <ItemGrid items={favourites}></ItemGrid>
         </Box>
       ) : (
-        <Typography variant="body1">Aún no has agregado productos a favoritos</Typography>
+        <Typography variant="body1">
+          Aún no has agregado productos a favoritos
+        </Typography>
       )}
     </>
   );

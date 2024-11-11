@@ -16,7 +16,9 @@ const Item = ({ imageUrl, title, price, state, productId }) => {
   const [imageError, setImageError] = useState(false);
 
   const handleNavigateProducto = () => {
-    const targetPath = state ? `/admin/products/${productId}` : `/products/${productId}`;
+    const targetPath = state
+      ? `/admin/products/${productId}`
+      : `/products/${productId}`;
     navigate(targetPath);
   };
 
