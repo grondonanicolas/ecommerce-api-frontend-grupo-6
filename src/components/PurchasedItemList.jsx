@@ -56,7 +56,10 @@ PurchasedItemList.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      imageUrl: PropTypes.string.isRequired,
+      photos: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.arrayOf(PropTypes.string)
+      ]).isRequired,
       quantity: PropTypes.number.isRequired,
     })
   ).isRequired,

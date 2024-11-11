@@ -36,7 +36,7 @@ const Product = () => {
       <Box alignContent={'center'} alignItems={'center'}>
         <ItemDetail
           descripcion={data.descripcion}
-          imageUrl={data.imageUrl}
+          photos={data.photos}
           title={data.name}
           price={data.price}
           stock={data.stock}

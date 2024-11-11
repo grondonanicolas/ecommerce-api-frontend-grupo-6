@@ -3,7 +3,6 @@ import { Box } from '@mui/material';
 import Item from './Item';
 
 const ItemGrid = ({ items }) => {
-  console.log(items)
   return (
     <Box
       sx={{
@@ -25,7 +24,7 @@ const ItemGrid = ({ items }) => {
           }}
         >
           <Item
-            imageUrl={item.image}
+            image={item?.photos?.find((f) => f.priority == 1)}
             title={item.name}
             price={item.price}
             productId={item.id}
@@ -40,7 +39,10 @@ ItemGrid.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      imageUrl: PropTypes.string.isRequired,
+      photos: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.arrayOf(PropTypes.string)
+      ]).isRequired,
       title: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
     })

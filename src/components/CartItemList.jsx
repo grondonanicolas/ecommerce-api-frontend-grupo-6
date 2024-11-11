@@ -20,7 +20,7 @@ const CartItemList = ({ items, onQuantityChange, onRemove }) => {
       {items.map((item, index) => (
         <Box key={item.id} sx={{ width: '100%', boxSizing: 'border-box' }}>
           <CartItem
-            imageUrl={item.imageUrl}
+            imageUrl={item.photos?.find((f) => f.priority == 1)}
             name={item.name}
             price={item.price}
             quantity={item.quantity}
@@ -48,7 +48,10 @@ CartItemList.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      imageUrl: PropTypes.string.isRequired,
+      photos: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.arrayOf(PropTypes.string)
+      ]).isRequired,
       name: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
       quantity: PropTypes.number.isRequired,

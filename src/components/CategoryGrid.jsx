@@ -49,7 +49,7 @@ const CategoryGrid = () => {
               }}
             >
               <Box
-                style={{
+                sx={{
                   width: '100px',
                   height: '100px',
                   display: 'flex',
@@ -59,13 +59,18 @@ const CategoryGrid = () => {
                   borderRadius: '100%',
                   boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
                   cursor: 'pointer',
+                  transition: '.5s all ease',
+                  '&:hover': {
+                    transform: 'scale(1.1)',
+                  }
+                }}
+                onClick={() => {
+                  navigate(`/products/catalog?category=${item.category}`);
                 }}
               >
                 <Typography
                   style={{ fontSize: '20px', color: 'black' }}
-                  onClick={() => {
-                    navigate(`/products/catalog?category=${item.category}`);
-                  }}
+                 
                 >
                   {item.category}
                 </Typography>

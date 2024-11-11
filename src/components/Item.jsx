@@ -11,7 +11,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-const Item = ({ imageUrl, title, price, state, productId }) => {
+const Item = ({ image, title, price, state, productId }) => {
   const navigate = useNavigate();
   const [imageError, setImageError] = useState(false);
 
@@ -49,7 +49,7 @@ const Item = ({ imageUrl, title, price, state, productId }) => {
         <CardMedia
           component="img"
           height="300"
-          image={imageUrl}
+          image={image?.url}
           alt={title}
           onError={() => setImageError(true)}
           sx={{ borderRadius: '12px' }}
@@ -88,7 +88,7 @@ const Item = ({ imageUrl, title, price, state, productId }) => {
 
 Item.propTypes = {
   title: PropTypes.string.isRequired,
-  imageUrl: PropTypes.string.isRequired,
+  image: PropTypes.object.isRequired,
   price: PropTypes.number,
   state: PropTypes.string,
   productId: PropTypes.number.isRequired,
