@@ -64,12 +64,12 @@ const CategoryGrid = () => {
                   boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
                   cursor: 'pointer',
                 }}
+                onClick={() => {
+                  navigate(`/products/catalog?category=${item.category}`);
+                }}
               >
                 <Typography
                   style={{ fontSize: '20px', color: 'black' }}
-                  onClick={() => {
-                    navigate(`/products/catalog?category=${item.category}`);
-                  }}
                 >
                   {item.category}
                 </Typography>

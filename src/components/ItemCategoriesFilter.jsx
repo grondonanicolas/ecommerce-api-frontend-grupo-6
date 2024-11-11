@@ -9,12 +9,12 @@ const ItemCategoriesFilter = ({
   category,
   onHandleFilterByCategory,
 }) => {
-  const [selectedCategory, setSelectedCategory] = useState(category);
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [isOpen, setIsOpen] = useState(true);
 
   const handleToggle = (type) => {
     if (selectedCategory === type) {
-      setSelectedCategory([]);
+      setSelectedCategory('');
       onHandleFilterByCategory('');
     } else {
       setSelectedCategory(type);
