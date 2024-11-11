@@ -9,25 +9,13 @@ export default function useHistoric() {
     FetcherSWR
   );
 
-  //ToDo: revisar
   const AddProductToHistoric = async (productId) => {
-    const options = {
-      method: 'post',
-      body: JSON.stringify({ productId }),
-    };
-
-    try {
-      const response = await fetch('users/historic', options);
-      if (!response.ok) {
-        throw new Error('Error al agregar producto al historial');
-      }
-      const result = await response.json();
-      mutate('products/historic');
-      return result;
-    } catch (err) {
-      console.error(err);
-      throw err;
-    }
+    await mutate(
+      FetcherSWR({
+        url: `users/historic`,
+        options: { method: 'post', data: { productId } },
+      })
+    );
   };
 
   return {

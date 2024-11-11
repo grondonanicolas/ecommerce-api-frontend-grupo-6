@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 import Item from './Item';
 
 const ItemGrid = ({ items }) => {
+  console.log(items)
   return (
     <Box
       sx={{
@@ -12,7 +13,7 @@ const ItemGrid = ({ items }) => {
         justifyContent: 'center',
       }}
     >
-      {items.map((item) => (
+      {items?.map((item) => (
         <Box
           key={item.id}
           sx={{
@@ -24,8 +25,8 @@ const ItemGrid = ({ items }) => {
           }}
         >
           <Item
-            imageUrl={item.imageUrl}
-            title={item.title}
+            imageUrl={item.image}
+            title={item.name}
             price={item.price}
             productId={item.id}
           />

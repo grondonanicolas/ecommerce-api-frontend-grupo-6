@@ -91,7 +91,7 @@ Item.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   price: PropTypes.number,
   state: PropTypes.string,
-  productId: PropTypes.string.isRequired,
+  productId: PropTypes.number.isRequired,
 };
 
 export default Item;

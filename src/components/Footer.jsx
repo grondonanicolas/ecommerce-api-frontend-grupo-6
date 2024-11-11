@@ -5,7 +5,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 
 const Footer = () => {
   return (
-    <Box sx={{ backgroundColor: '#f9f9f9', padding: 4 }}>
+    <Box sx={{ backgroundColor: '#f9f9f9', padding: 4, marginTop: 8 }}>
       {/* Main Footer Section */}
       <Grid2 container spacing={4}>
         {/* Company Info */}
