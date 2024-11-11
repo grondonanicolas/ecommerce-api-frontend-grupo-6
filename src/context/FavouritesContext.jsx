@@ -1,18 +1,34 @@
 import PropTypes from 'prop-types';
-import { createContext, useState } from 'react';
+import { createContext } from 'react';
+import useSWR, { mutate } from 'swr';
+import FetcherSWR from '../utils/fetcherSWR';
 
 export const FavouritesContext = createContext();
 
 function FavouritesContextProvider({ children }) {
-  const [favourites, setFavourites] = useState([]);
+  const { data: favourites, error, isLoading } = useSWR(
+    {
+      url: 'users/favourite',
+    },
+    FetcherSWR
+  );
 
-  const addFavourite = (product) => {
-    setFavourites((prev) => [...prev, product]);
+  const addFavourite = async (product) => {
+    try {
+      await mutate(
+        FetcherSWR({
+          url: `users/favourite`,
+          options: { method: 'post', data: { productId: product } },
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const removeFavourite = (productId) => {
-    const filteredFavourites = favourites.filter((fav) => fav.id !== productId);
-    setFavourites(filteredFavourites);
+    // const filteredFavourites = favourites.filter((fav) => fav.id !== productId);
+    // setFavourites(filteredFavourites);
   };
 
   const isFavouriteCheck = (productId) => {
@@ -21,7 +37,14 @@ function FavouritesContextProvider({ children }) {
 
   return (
     <FavouritesContext.Provider
-      value={{ favourites, addFavourite, removeFavourite, isFavouriteCheck }}
+      value={{
+        favourites,
+        addFavourite,
+        removeFavourite,
+        isFavouriteCheck,
+        error,
+        isLoading,
+      }}
     >
       {children}
     </FavouritesContext.Provider>

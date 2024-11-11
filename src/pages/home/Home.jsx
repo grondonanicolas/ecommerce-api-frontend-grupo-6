@@ -1,24 +1,20 @@
-import { Box, Grid, Grid2, Stack } from '@mui/material';
-import UserInfo from '../../components/UserInfo';
+import { Box, Stack } from '@mui/material';
 import ProductsOutstanding from '../../components/ProductsOutstanding';
-import ProductsHistoric from '../../components/UserProductsHistoric';
+import UserProductsHistoric from '../../components/UserProductsHistoric';
+import CategoryGrid from '../../components/CategoryGrid'
 
 const Home = () => {
-  // const user = {
-  //   name: 'John Doe',
-  //   avatarUrl: 'https://via.placeholder.com/100',
-  //   email: 'john@email.com',
-  // };
+
   return (
     <Stack container spacing={6} direction="column" className="App" gap={8}>
-      {/* <Box>
-        <UserInfo user={user} />
-      </Box> */}
       <Box>
         <ProductsOutstanding />
       </Box>
       <Box>
-        <ProductsHistoric />
+        <UserProductsHistoric />
+      </Box>
+      <Box>
+        <CategoryGrid />
       </Box>
     </Stack>
   );

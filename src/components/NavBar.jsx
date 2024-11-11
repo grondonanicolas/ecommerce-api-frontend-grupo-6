@@ -3,12 +3,12 @@ import {
   ShoppingCart as ShoppingCartIcon,
   AccountCircle as AccountCircleIcon,
 } from '@mui/icons-material';
-import SearchBar from './SearchBar';
+// import SearchBar from './SearchBar';
 
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <AppBar
       position="static"
@@ -26,9 +26,9 @@ const NavBar = () => {
             fontWeight: 'bold',
             minWidth: '100px',
           }}
-          // onClick={() => {
-          //   navigate('/');
-          // }}
+          onClick={() => {
+            navigate('/');
+          }}
         >
           Sportify
         </Typography>
@@ -36,22 +36,32 @@ const NavBar = () => {
           sx={{
             flexGrow: 1,
             display: 'flex',
-            justifyContent: 'center',
+            justifyContent: 'right',
             gap: 2,
             m: 2,
           }}
         >
-          <Typography color="black" variant="body1" component="div">
+          {/* <Typography color="black" variant="body1" component="div">
             Destacados
-          </Typography>
-          <Typography color="black" variant="body1" component="div">
+          </Typography> */}
+          <Typography
+            color="black"
+            variant="body1"
+            component="div"
+            onClick={() => navigate('products/catalog')}
+          >
             Catálogo
           </Typography>
-          <Typography color="black" variant="body1" component="div">
-            Nuevo
+          <Typography
+            color="black"
+            variant="body1"
+            component="div"
+            onClick={() => navigate('user/favourites')}
+          >
+            Favoritos
           </Typography>
         </Box>
-        <SearchBar />
+        {/* <SearchBar /> */}
         <IconButton color="black" size="large" edge="end">
           <ShoppingCartIcon />
         </IconButton>
