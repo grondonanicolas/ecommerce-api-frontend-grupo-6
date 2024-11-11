@@ -29,16 +29,25 @@ const ProductAdminBoard = () => {
         Mis Productos
       </Typography>
       <Grid container spacing={2}>
-        {data.map((product) => (
-          <Grid item key={product.id}>
-            <Item
-              imageUrl={product.image}
-              title={product.name}
-              state={product.state}
-              productId={product.id}
-            />
-          </Grid>
-        ))}
+        {data.map((product) => {
+          // Seleccionamos la foto con el priority más bajo
+          const primaryPhoto = product.photos?.length
+            ? product.photos.reduce((minPhoto, currentPhoto) =>
+                currentPhoto.priority < minPhoto.priority ? currentPhoto : minPhoto
+              )
+            : null;
+
+          return (
+            <Grid item key={product.id}>
+              <Item
+                imageUrl={primaryPhoto?.url || 'https://via.placeholder.com/150'}
+                title={product.name}
+                state={product.state}
+                productId={product.id}
+              />
+            </Grid>
+          );
+        })}
       </Grid>
     </Box>
   );

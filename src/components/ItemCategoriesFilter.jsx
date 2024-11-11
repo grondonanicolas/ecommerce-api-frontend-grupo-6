@@ -4,25 +4,29 @@ import { Box, Typography, IconButton, Collapse, Chip } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
-const ItemCategoriesFilter = ({ itemCategories, category, onHandleFilterByCategory }) => {
+const ItemCategoriesFilter = ({
+  itemCategories,
+  category,
+  onHandleFilterByCategory,
+}) => {
   const [selectedCategory, setSelectedCategory] = useState(category);
   const [isOpen, setIsOpen] = useState(true);
 
   const handleToggle = (type) => {
-    if(selectedCategory === type){
-      setSelectedCategory([])
-      onHandleFilterByCategory("")
+    if (selectedCategory === type) {
+      setSelectedCategory([]);
+      onHandleFilterByCategory('');
     } else {
-      setSelectedCategory(type)
-      onHandleFilterByCategory(type)
+      setSelectedCategory(type);
+      onHandleFilterByCategory(type);
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     if (category) {
-      handleToggle(category)
+      handleToggle(category);
     }
-  }, [category])
+  }, [category]);
 
   return (
     <Box>
@@ -48,13 +52,11 @@ const ItemCategoriesFilter = ({ itemCategories, category, onHandleFilterByCatego
               onClick={() => handleToggle(type.category)}
               sx={{
                 color: selectedCategory === type.category ? 'white' : 'black',
-                backgroundColor: selectedCategory === type.category
-                  ? 'black'
-                  : 'lightgray',
+                backgroundColor:
+                  selectedCategory === type.category ? 'black' : 'lightgray',
                 '&:hover': {
-                  backgroundColor: selectedCategory === type.category
-                    ? 'black'
-                    : 'gray',
+                  backgroundColor:
+                    selectedCategory === type.category ? 'black' : 'gray',
                 },
               }}
             />
@@ -68,7 +70,7 @@ const ItemCategoriesFilter = ({ itemCategories, category, onHandleFilterByCatego
 ItemCategoriesFilter.propTypes = {
   itemCategories: PropTypes.arrayOf(PropTypes.object).isRequired,
   onHandleFilterByCategory: PropTypes.func,
-  category: PropTypes.string
+  category: PropTypes.string,
 };
 
 export default ItemCategoriesFilter;

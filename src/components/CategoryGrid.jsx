@@ -2,10 +2,9 @@ import { Box, Typography } from '@mui/material';
 import FetcherSWR from '../utils/fetcherSWR';
 import useSWR from 'swr';
 import ItemGridSkeleton from './skeletons/ItemGridSkeleton';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 const CategoryGrid = () => {
-
   const navigate = useNavigate();
 
   const {
@@ -27,7 +26,12 @@ const CategoryGrid = () => {
     return (
       <>
         <Box marginBottom={5}>
-          <Typography variant="h4" fontWeight="bold" gutterBottom justifyContent={'center'}>
+          <Typography
+            variant="h4"
+            fontWeight="bold"
+            gutterBottom
+            justifyContent={'center'}
+          >
             Categorías
           </Typography>
         </Box>

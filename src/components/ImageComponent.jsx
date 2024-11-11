@@ -11,7 +11,6 @@ const ImageComponent = () => {
     <div className="image-component">
       <div className="logo-container">
         <img src={logo} alt="Logo" className="logo" />
-       
       </div>
       <div className="social-icons">
         <img src={facebookIcon} alt="Facebook" />

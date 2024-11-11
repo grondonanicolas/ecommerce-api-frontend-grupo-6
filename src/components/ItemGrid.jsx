@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import Item from './Item';
 
 const ItemGrid = ({ items }) => {
-  console.log(items)
+  console.log(items);
   return (
     <Box
       sx={{

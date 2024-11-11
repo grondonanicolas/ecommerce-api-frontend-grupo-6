@@ -7,7 +7,7 @@ import ItemCategoriesFilter from './ItemCategoriesFilter';
 const ItemFilterBar = ({
   itemCategories,
   category,
-  onHandleFilterByCategory
+  onHandleFilterByCategory,
 }) => {
   return (
     <Box
@@ -34,7 +34,11 @@ const ItemFilterBar = ({
 
       <Divider sx={{ my: 2 }} />
 
-      <ItemCategoriesFilter itemCategories={itemCategories} category={category} onHandleFilterByCategory={onHandleFilterByCategory}/>
+      <ItemCategoriesFilter
+        itemCategories={itemCategories}
+        category={category}
+        onHandleFilterByCategory={onHandleFilterByCategory}
+      />
     </Box>
   );
 };
@@ -42,7 +46,7 @@ const ItemFilterBar = ({
 ItemFilterBar.propTypes = {
   itemCategories: PropTypes.arrayOf(PropTypes.object).isRequired,
   onHandleFilterByCategory: PropTypes.func.isRequired,
-  category: PropTypes.string
+  category: PropTypes.string,
 };
 
 export default ItemFilterBar;

@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { Box, TextField, Typography, Button, Link } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
-import { AuthContext } from '../context/AuthContext'; 
+import { AuthContext } from '../context/AuthContext';
 
 const LoginForm = () => {
   const { login, error } = useContext(AuthContext); //  función login del contexto
@@ -23,7 +23,7 @@ const LoginForm = () => {
     try {
       await login(formData.email, formData.password); // Llama a login con los datos del formulario
     } catch (err) {
-      console.error("Error al iniciar sesión:", err.message);
+      console.error('Error al iniciar sesión:', err.message);
     }
   };
 
@@ -106,7 +106,11 @@ const LoginForm = () => {
         <Link href="#" variant="body2" color="text.secondary">
           Forgot your password?
         </Link>
-        <Link href="#" variant="body2" sx={{ fontWeight: 'bold', color: 'black' }}>
+        <Link
+          href="#"
+          variant="body2"
+          sx={{ fontWeight: 'bold', color: 'black' }}
+        >
           Create an account
         </Link>
       </Box>

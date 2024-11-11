@@ -1,5 +1,14 @@
 import { useState, useContext } from 'react';
-import { Box, Button, Typography, Modal, TextField, Snackbar, Alert, Grid } from '@mui/material';
+import {
+  Box,
+  Button,
+  Typography,
+  Modal,
+  TextField,
+  Snackbar,
+  Alert,
+  Grid,
+} from '@mui/material';
 import { Add as AddIcon, Cancel as CancelIcon } from '@mui/icons-material';
 import useSWR, { mutate } from 'swr';
 import FetcherSWR from '../../../utils/fetcherSWR';
@@ -7,7 +16,11 @@ import { AuthContext } from '../../../context/AuthContext';
 
 const CategoriesAdmin = () => {
   const { user } = useContext(AuthContext);
-  const { data: categories, error, isLoading } = useSWR(
+  const {
+    data: categories,
+    error,
+    isLoading,
+  } = useSWR(
     {
       url: 'category',
     },
@@ -65,18 +78,18 @@ const CategoriesAdmin = () => {
 
   return (
     <Box>
-        <Typography variant="h4" gutterBottom>
-          Listado de Categorías
-        </Typography>
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<AddIcon />}
-          onClick={handleOpenModal}
-        >
-          Agregar categoría
-        </Button>
-      
+      <Typography variant="h4" gutterBottom>
+        Listado de Categorías
+      </Typography>
+      <Button
+        variant="contained"
+        color="primary"
+        startIcon={<AddIcon />}
+        onClick={handleOpenModal}
+      >
+        Agregar categoría
+      </Button>
+
       <Grid container marginTop={2} spacing={2}>
         {categories.map((category) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={category.id}>
