@@ -15,7 +15,8 @@ const CategoryGrid = () => {
     {
       url: 'category',
     },
-    FetcherSWR
+    FetcherSWR,
+    {revalidateOnFocus: false}
   );
 
   if (isLoading) return <ItemGridSkeleton />;

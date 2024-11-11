@@ -14,7 +14,8 @@ function FavouritesContextProvider({ children }) {
     {
       url: 'users/favourite',
     },
-    FetcherSWR
+    FetcherSWR,
+    {revalidateOnFocus: false,}
   );
 
   const addFavourite = async (product) => {

@@ -9,7 +9,8 @@ export default function ProductsOutstanding() {
     {
       url: 'products/outstanding',
     },
-    FetcherSWR
+    FetcherSWR,
+    {revalidateOnFocus: false,}
   );
 
   if (isLoading) return <ItemGridSkeleton />;
