@@ -13,7 +13,13 @@ const ItemGrid = ({ items }) => {
         justifyContent: 'center',
       }}
     >
-      {items?.map((item) => (
+      {items?.map((item) => {
+        const primaryPhoto = item.photos?.length
+        ? item.photos.reduce((minPhoto, currentPhoto) =>
+            currentPhoto.priority < minPhoto.priority ? currentPhoto : minPhoto
+          )
+        : null;
+        return(
         <Box
           key={item.id}
           sx={{
@@ -25,13 +31,13 @@ const ItemGrid = ({ items }) => {
           }}
         >
           <Item
-            imageUrl={item.image}
+            imageUrl={primaryPhoto?.url}
             title={item.name}
             price={item.price}
             productId={item.id}
           />
         </Box>
-      ))}
+      )})}
     </Box>
   );
 };
