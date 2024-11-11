@@ -32,7 +32,7 @@ const Item = ({ imageUrl, title, price, state, productId }) => {
   };
 
   return (
-    <Card elevation={0} sx={{ width: 250, borderRadius: '12px' }}>
+    <Card elevation={0} sx={{ width: '100%', borderRadius: '12px' }}>
       {imageError ? (
         <Box
           height="300px"

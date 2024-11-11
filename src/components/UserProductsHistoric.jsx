@@ -21,7 +21,7 @@ export default function UserProductsHistoric() {
         >
           Historial
         </Typography>
-        {data.length > 0 && <ItemGrid items={data} />}
+        {data.length > 0 && <ItemGrid items={data.slice(0,6)} />}
         {data.length === 0 && (
           <Typography>Aún no has visitado ningún producto</Typography>
         )}

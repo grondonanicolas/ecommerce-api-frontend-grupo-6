@@ -16,6 +16,7 @@ import UserAdmin from '../pages/admin/users/UserAdmin';
 import EcommerceContainer from '../components/EcommerceContainer';
 import AdminContainer from '../components/AdminContainer';
 import CategoriesAdmin from '../pages/admin/categories/CategoriesAdmin';
+import Favourites from '../pages/user/favourites/Favourites';
 
 const deliveredExampleData = {
   date: '04 de Marzo',
@@ -161,6 +162,10 @@ const router = createBrowserRouter([
                   {
                     path: 'historic',
                     element: <Historic />,
+                  },
+                  {
+                    path: 'favourites',
+                    element: <Favourites />,
                   },
                 ],
               },
