@@ -3,7 +3,7 @@ import { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authenticate } from '../services/serviceLogin';
 import { signup as signupService } from '../services/serviceSignup';
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode } from 'jwt-decode';
 
 export const AuthContext = createContext();
 
@@ -24,9 +24,9 @@ export function AuthProvider({ children }) {
       const { token } = await authenticate(email, password);
 
       if (typeof token !== 'string') {
-        console.error("Invalid token:", token);
+        console.error('Invalid token:', token);
         return;
-    }
+      }
 
       const decodedToken = jwtDecode(token);
 

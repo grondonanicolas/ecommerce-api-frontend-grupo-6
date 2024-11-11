@@ -4,19 +4,21 @@ import useSWR from 'swr';
 import FetcherSWR from '../../../utils/fetcherSWR';
 import ItemDetailSkeleton from '../../../components/skeletons/ItemDetailSkeleton';
 import ItemDetailEdit from '../../../components/ItemDetailEdit';
-import {AuthContext} from '../../../context/AuthContext'
+import { AuthContext } from '../../../context/AuthContext';
 import { Box } from '@mui/material';
 
 const ProductAdmin = () => {
   const { productId } = useParams();
+  const { user } = useContext(AuthContext);
 
-  const { user } = useContext(AuthContext)
   const { data, error, isLoading } = useSWR(
     {
       url: `products/${productId}`,
     },
-    FetcherSWR
+    FetcherSWR,
+    { revalidateOnFocus: true }
   );
+  
 
   if (isLoading) {
     return <ItemDetailSkeleton />;
@@ -26,13 +28,13 @@ const ProductAdmin = () => {
     return <p>Error al cargar producto</p>;
   }
 
-  console.log(data)
+  console.log(data);
 
   if (data) {
     return (
       <Box alignContent={'center'} alignItems={'center'}>
         <ItemDetailEdit
-          imageUrl={data.image}
+          photos={data.photos}
           descripcion={data.description}
           title={data.name}
           price={data.price}
@@ -45,6 +47,8 @@ const ProductAdmin = () => {
       </Box>
     );
   }
+
+  return null;
 };
 
 export default ProductAdmin;

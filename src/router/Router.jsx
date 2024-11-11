@@ -8,6 +8,7 @@ import Historic from '../pages/user/historic/Historic';
 import Product from '../pages/products/product/Product';
 import Profile from '../pages/user/profile/Profile';
 import ProductAdminBoard from '../pages/admin/products/ProductAdminBoard';
+import ProductCreate from '../pages/admin/products/ProductCreate';
 import ProductAdmin from '../pages/admin/products/ProductAdmin';
 // import ProtectedRoute from './ProtectedRoute';
 import NotFound from '../pages/not-found/NotFound';
@@ -16,6 +17,7 @@ import UserAdmin from '../pages/admin/users/UserAdmin';
 import EcommerceContainer from '../components/EcommerceContainer';
 import AdminContainer from '../components/AdminContainer';
 import CategoriesAdmin from '../pages/admin/categories/CategoriesAdmin';
+import Favourites from '../pages/user/favourites/Favourites';
 
 const deliveredExampleData = {
   date: '04 de Marzo',
@@ -103,7 +105,11 @@ const router = createBrowserRouter([
         children: [
           {
             path: 'products',
-            element: <ProductAdminBoard/>,
+            element: <ProductAdminBoard />,
+          },
+          {
+            path: 'products/create',
+            element: <ProductCreate />,
           },
           {
             path: 'products/:productId',
@@ -161,6 +167,10 @@ const router = createBrowserRouter([
                   {
                     path: 'historic',
                     element: <Historic />,
+                  },
+                  {
+                    path: 'favourites',
+                    element: <Favourites />,
                   },
                 ],
               },

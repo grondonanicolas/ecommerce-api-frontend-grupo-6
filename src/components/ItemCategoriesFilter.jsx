@@ -1,20 +1,32 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Typography, IconButton, Collapse, Chip } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
-const ItemCategoriesFilter = ({ itemCategories }) => {
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
+const ItemCategoriesFilter = ({
+  itemCategories,
+  category,
+  onHandleFilterByCategory,
+}) => {
+  const [selectedCategory, setSelectedCategory] = useState(category);
+  const [isOpen, setIsOpen] = useState(true);
 
   const handleToggle = (type) => {
-    setSelectedCategories((prevSelected) =>
-      prevSelected.includes(type)
-        ? prevSelected.filter((item) => item !== type)
-        : [...prevSelected, type]
-    );
+    if (selectedCategory === type) {
+      setSelectedCategory([]);
+      onHandleFilterByCategory('');
+    } else {
+      setSelectedCategory(type);
+      onHandleFilterByCategory(type);
+    }
   };
+
+  useEffect(() => {
+    if (category) {
+      handleToggle(category);
+    }
+  }, [category]);
 
   return (
     <Box>
@@ -35,18 +47,16 @@ const ItemCategoriesFilter = ({ itemCategories }) => {
         <Box display="flex" flexWrap="wrap" gap={1} mt={1}>
           {itemCategories.map((type) => (
             <Chip
-              key={type}
-              label={type}
-              onClick={() => handleToggle(type)}
+              key={type.id}
+              label={type.category}
+              onClick={() => handleToggle(type.category)}
               sx={{
-                color: selectedCategories.includes(type) ? 'white' : 'black',
-                backgroundColor: selectedCategories.includes(type)
-                  ? 'black'
-                  : 'lightgray',
+                color: selectedCategory === type.category ? 'white' : 'black',
+                backgroundColor:
+                  selectedCategory === type.category ? 'black' : 'lightgray',
                 '&:hover': {
-                  backgroundColor: selectedCategories.includes(type)
-                    ? 'black'
-                    : 'gray',
+                  backgroundColor:
+                    selectedCategory === type.category ? 'black' : 'gray',
                 },
               }}
             />
@@ -58,7 +68,9 @@ const ItemCategoriesFilter = ({ itemCategories }) => {
 };
 
 ItemCategoriesFilter.propTypes = {
-  itemCategories: PropTypes.arrayOf(PropTypes.string).isRequired,
+  itemCategories: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onHandleFilterByCategory: PropTypes.func,
+  category: PropTypes.string,
 };
 
 export default ItemCategoriesFilter;

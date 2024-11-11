@@ -1,7 +1,4 @@
 import { useContext, useEffect, useState } from 'react';
-// import Card from '@mui/material/Card';
-// import CardContent from '@mui/material/CardContent';
-// import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
@@ -22,7 +19,11 @@ import { FavouritesContext } from '../context/FavouritesContext';
 const sizes = ['XS', 'S', 'M', 'L', 'XL'];
 
 const ItemDetail = ({
-  imageUrl,
+  imageUrl = [
+    'https://i.blogs.es/0ca9a6/aa/1366_2000.jpeg',
+    'https://next-images.123rf.com/index/_next/image/?url=https://assets-cdn.123rf.com/index/static/assets/top-section-bg.jpeg&w=3840&q=75',
+    'https://media.istockphoto.com/id/636379014/es/foto/manos-la-formaci%C3%B3n-de-una-forma-de-coraz%C3%B3n-con-silueta-al-atardecer.jpg?s=612x612&w=0&k=20&c=R2BE-RgICBnTUjmxB8K9U0wTkNoCKZRi-Jjge8o_OgE=',
+  ],
   title,
   price = 0,
   stock,
@@ -31,6 +32,10 @@ const ItemDetail = ({
 }) => {
   const [selectedSize, setSelectedSize] = useState(null);
   const [isFavourite, setIsFavourite] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+  // Aseguramos que imageUrl sea siempre un array
+  const images = Array.isArray(imageUrl) ? imageUrl : [imageUrl];
 
   const { isFavouriteCheck, addFavourite, removeFavourite } =
     useContext(FavouritesContext);
@@ -80,37 +85,93 @@ const ItemDetail = ({
     >
       <Grid container spacing={3} sx={{ p: 2 }}>
         <Grid item xs={12} md={8} lg={7}>
-          <Box sx={{ position: 'relative', height: '100%' }}>
-            <img
-              //   src={imageUrl || '/api/placeholder/600/600'}
-              src={
-                'https://random.imagecdn.app/v1/image?width=500&height=150&category=clothes&format=image'
-              }
-              alt={title || 'Producto'}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                borderRadius: '8px',
-              }}
-            />
-            <IconButton
+          <Box
+            sx={{
+              display: 'flex',
+              gap: 2,
+              position: 'relative',
+              height: '100%',
+            }}
+          >
+            {/* Carrusel vertical de miniaturas - solo se muestra si hay más de una imagen */}
+            {images.length > 1 && (
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 1,
+                  p: 0.5,
+                }}
+              >
+                {images.map((img, index) => (
+                  <Box
+                    key={index}
+                    onClick={() => setSelectedImageIndex(index)}
+                    sx={{
+                      width: 60,
+                      height: 60,
+                      cursor: 'pointer',
+                      border:
+                        index === selectedImageIndex
+                          ? '2px solid #3483fa'
+                          : '1px solid lightgray',
+                      borderRadius: 1,
+                      overflow: 'hidden',
+                      opacity: index === selectedImageIndex ? 1 : 0.7,
+                      transition: 'all 0.2s ease-in-out',
+                      '&:hover': {
+                        opacity: 1,
+                      },
+                    }}
+                  >
+                    <img
+                      src={img}
+                      alt={`${title} - imagen ${index + 1}`}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
+                    />
+                  </Box>
+                ))}
+              </Box>
+            )}
+
+            {/* Imagen principal */}
+            <Box
               sx={{
-                position: 'absolute',
-                top: 8,
-                right: 8,
-                backgroundColor: 'white',
-                boxShadow: 1,
-                '&:hover': {
-                  backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                },
-              }}
-              onClick={() => {
-                handleFavourite(productId);
+                flexGrow: 1,
+                position: 'relative',
+                height: '100%',
               }}
             >
-              {isFavourite ? <StarIcon /> : <StarBorderIcon />}
-            </IconButton>
+              <img
+                src={images[selectedImageIndex]}
+                alt={title || 'Producto'}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  borderRadius: '8px',
+                }}
+              />
+              <IconButton
+                sx={{
+                  position: 'absolute',
+                  top: 8,
+                  right: 8,
+                  backgroundColor: 'white',
+                  boxShadow: 1,
+                  '&:hover': {
+                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                  },
+                }}
+                onClick={handleFavourite}
+              >
+                {isFavourite ? <StarIcon /> : <StarBorderIcon />}
+              </IconButton>
+            </Box>
           </Box>
         </Grid>
 
@@ -152,7 +213,6 @@ const ItemDetail = ({
 
             <Divider sx={{ my: 2 }} />
 
-            {/* Envío */}
             <Box
               sx={{
                 display: 'flex',
@@ -181,7 +241,6 @@ const ItemDetail = ({
 
             <Divider sx={{ my: 2 }} />
 
-            {/* Selector de Talle */}
             <Typography
               variant="body1"
               sx={{
@@ -191,8 +250,6 @@ const ItemDetail = ({
             >
               Talle
             </Typography>
-
-            {/* Stock */}
 
             <ToggleButtonGroup
               value={selectedSize}
@@ -226,7 +283,6 @@ const ItemDetail = ({
               ))}
             </ToggleButtonGroup>
 
-            {/* Botón de Compra */}
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               <Button
                 variant="contained"
@@ -255,7 +311,10 @@ const ItemDetail = ({
 };
 
 ItemDetail.propTypes = {
-  imageUrl: PropTypes.string.isRequired,
+  imageUrl: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+  ]).isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   stock: PropTypes.number.isRequired,
