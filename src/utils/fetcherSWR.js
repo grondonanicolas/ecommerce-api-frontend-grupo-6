@@ -6,7 +6,6 @@ const FetcherSWR = async ({ url, options }) => {
   if (!url) {
     return;
   }
-  console.log('entra');
 
   const bearerToken = window.localStorage.getItem('token');
 
@@ -19,6 +18,7 @@ const FetcherSWR = async ({ url, options }) => {
     url: `${API_URL}/${url}`,
     headers,
     method: options?.method || 'get',
+    data: options?.data || {},
     ...options,
   });
 
