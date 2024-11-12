@@ -19,11 +19,7 @@ import { FavouritesContext } from '../context/FavouritesContext';
 const sizes = ['XS', 'S', 'M', 'L', 'XL'];
 
 const ItemDetail = ({
-  photos = [
-    'https://i.blogs.es/0ca9a6/aa/1366_2000.jpeg',
-    'https://next-images.123rf.com/index/_next/image/?url=https://assets-cdn.123rf.com/index/static/assets/top-section-bg.jpeg&w=3840&q=75',
-    'https://media.istockphoto.com/id/636379014/es/foto/manos-la-formaci%C3%B3n-de-una-forma-de-coraz%C3%B3n-con-silueta-al-atardecer.jpg?s=612x612&w=0&k=20&c=R2BE-RgICBnTUjmxB8K9U0wTkNoCKZRi-Jjge8o_OgE=',
-  ],
+  photos,
   title,
   price = 0,
   stock,
