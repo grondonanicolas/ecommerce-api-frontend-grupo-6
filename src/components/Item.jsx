@@ -54,7 +54,7 @@ const Item = ({ imageUrl, title, price, state, productId }) => {
           image={imageUrl}
           alt={title}
           onError={() => setImageError(true)}
-          sx={{ borderRadius: '12px' }}
+          sx={{ borderRadius: '12px', objectFit: 'contain' }}
         />
       )}
       <CardContent>

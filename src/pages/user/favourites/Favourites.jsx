@@ -27,31 +27,33 @@ export default function Favourites() {
   }
 
   if (error) {
-    <p>Ocurrió un error</p>;
+    return(<p>Ocurrió un error al cargar los favoritos.</p>)
   }
 
-  return (
-    <>
-      <Box marginBottom={5}>
-        <Typography
-          variant="h4"
-          fontWeight="bold"
-          gutterBottom
-          justifyContent={'center'}
-        >
-          Favoritos
-        </Typography>
-      </Box>
-
-      {favourites?.length > 0 ? (
-        <Box sx={{ width: '90%', margin: '0 auto' }}>
-          <ItemGrid items={favourites}></ItemGrid>
+  if(favourites){
+    return (
+      <>
+        <Box marginBottom={5}>
+          <Typography
+            variant="h4"
+            fontWeight="bold"
+            gutterBottom
+            justifyContent={'center'}
+          >
+            Favoritos
+          </Typography>
         </Box>
-      ) : (
-        <Typography variant="body1">
-          Aún no has agregado productos a favoritos
-        </Typography>
-      )}
-    </>
-  );
+  
+        {favourites?.length > 0 ? (
+          <Box sx={{ width: '90%', margin: '0 auto' }}>
+            <ItemGrid items={favourites}></ItemGrid>
+          </Box>
+        ) : (
+          <Typography variant="body1">
+            Aún no has agregado productos a favoritos
+          </Typography>
+        )}
+      </>
+    );
+  }
 }

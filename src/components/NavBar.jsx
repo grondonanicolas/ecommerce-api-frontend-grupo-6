@@ -25,6 +25,9 @@ const NavBar = () => {
             display: { xs: 'none', sm: 'block' },
             fontWeight: 'bold',
             minWidth: '100px',
+            cursor: "pointer",
+            '&:hover':{
+            }
           }}
           onClick={() => {
             navigate('/');
@@ -49,6 +52,10 @@ const NavBar = () => {
             variant="body1"
             component="div"
             onClick={() => navigate('products/catalog')}
+            sx={{
+              cursor: "pointer",
+            }}
+            
           >
             Catálogo
           </Typography>
@@ -57,6 +64,8 @@ const NavBar = () => {
             variant="body1"
             component="div"
             onClick={() => navigate('user/favourites')}
+            sx={{cursor: "pointer"}}
+
           >
             Favoritos
           </Typography>

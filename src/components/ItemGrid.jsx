@@ -27,6 +27,9 @@ const ItemGrid = ({ items }) => {
             alignItems: 'center',
             justifyContent: 'center',
             width: '100%',
+            border: '2px solid lightgray',
+            borderRadius: '10px',
+            padding: '2px'
           }}
         >
           <Item

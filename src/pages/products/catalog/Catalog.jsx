@@ -41,6 +41,10 @@ const Catalog = () => {
     setFilteredProducts(products.filter((p) => p.category === categoryFilter));
   };
 
+  if(error){
+    return (<p>Hubo un error al cargar los productos</p>)
+  }
+
   if (isLoading) {
     return (
       <Box sx={{ width: '90%', margin: '0 auto' }}>
@@ -50,8 +54,8 @@ const Catalog = () => {
   }
 
   return (
-    <Box sx={{ width: '90%', margin: '0 auto' }}>
-      <Box marginBottom={3}>
+    <Box sx={{ width: '90%', margin: '0 auto' }} display={'flex'}>
+      <Box marginBottom={3} sx={{ width: '30%'}}>
         {categories && (
           <ItemFilterBar
             itemCategories={categories}
@@ -60,7 +64,7 @@ const Catalog = () => {
           />
         )}
       </Box>
-      <Box>
+      <Box sx={{ width: '60%', margin: '0 auto'}}>
         {fileteredProducts?.length > 0 ? (
           <ItemGrid items={fileteredProducts} />
         ) : (
