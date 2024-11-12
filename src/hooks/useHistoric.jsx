@@ -11,12 +11,16 @@ export default function useHistoric() {
   );
 
   const AddProductToHistoric = async (productId) => {
-    await mutate(
-      FetcherSWR({
+    try {
+      await FetcherSWR({
         url: `users/historic`,
         options: { method: 'post', data: { productId } },
-      })
-    );
+      });
+
+      await mutate({ url: 'users/historic' });
+    } catch (error) {
+      console.error('Error adding product to historic:', error);
+    }
   };
 
   return {

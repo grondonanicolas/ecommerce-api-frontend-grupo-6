@@ -20,8 +20,17 @@ const Product = () => {
 
   useEffect(() => {
     if (!productId) return;
-    AddProductToHistoric(productId);
-  }, [productId]);
+
+    const updateHistoric = async () => {
+      try {
+        await AddProductToHistoric(productId);
+      } catch (error) {
+        console.error('Error updating historic:', error);
+      }
+    };
+
+    updateHistoric();
+  }, [productId, AddProductToHistoric]);
 
   if (isLoading) {
     return <ItemDetailSkeleton />;
