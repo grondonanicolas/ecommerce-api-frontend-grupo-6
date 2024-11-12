@@ -53,7 +53,8 @@ const NavBar = () => {
             component="div"
             onClick={() => navigate('products/catalog')}
             sx={{
-              cursor: "pointer",
+              cursor: 'pointer',
+              mr: 1,
             }}
             
           >
@@ -76,6 +77,7 @@ const NavBar = () => {
           size="large"
           edge="end"
           onClick={() => navigate('/cart')}
+          sx={{ mr: 0.5 }}
         >
           <ShoppingCartIcon />
         </IconButton>
