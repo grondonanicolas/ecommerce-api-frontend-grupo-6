@@ -1,11 +1,15 @@
 import PropTypes from 'prop-types';
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
 import useSWR, { mutate } from 'swr';
 import FetcherSWR from '../utils/fetcherSWR';
+import { SnackBarContext } from './SnackBarContext';
 
 export const FavouritesContext = createContext();
 
 function FavouritesContextProvider({ children }) {
+  const { onToggleOpenSnackbar, onSetSnackBarMessage, onSetSnachBarSeverity } =
+    useContext(SnackBarContext);
+
   const {
     data: favourites,
     error,
@@ -15,7 +19,7 @@ function FavouritesContextProvider({ children }) {
       url: 'users/favourite',
     },
     FetcherSWR,
-    {revalidateOnFocus: false,}
+    { revalidateOnFocus: false }
   );
 
   const addFavourite = async (product) => {
@@ -26,6 +30,9 @@ function FavouritesContextProvider({ children }) {
           options: { method: 'post', data: { productId: product } },
         })
       );
+      onSetSnachBarSeverity('success')
+      onSetSnackBarMessage('Producto agregado a favoritos')
+      onToggleOpenSnackbar(true)
     } catch (error) {
       console.log(error);
     }
