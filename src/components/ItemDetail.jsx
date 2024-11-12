@@ -49,12 +49,19 @@ const ItemDetail = ({
 
   const handleAddToCart = async () => {
     if (!user) {
-      alert('Debes iniciar sesión para agregar productos al carrito');
-      navigate('/login');
+      onSetSnackBarMessage(
+        'Debes iniciar sesión para agregar productos al carrito'
+      );
+      onSetSnachBarSeverity('error');
+      onToggleOpenSnackbar(true);
       return;
     }
     if (!selectedSize) {
-      alert('Por favor selecciona un talle');
+      onSetSnackBarMessage(
+        'Por favor selecciona un talle'
+      );
+      onSetSnachBarSeverity('error');
+      onToggleOpenSnackbar(true);
       return;
     }
 
