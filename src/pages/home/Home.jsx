@@ -63,10 +63,10 @@ const Home = () => {
         />
       </Box>
       <Box>
-        <ProductsOutstanding />
+        <CategoryGrid />
       </Box>
       <Box>
-        <CategoryGrid />
+        <ProductsOutstanding />
       </Box>
 
       {user && (
