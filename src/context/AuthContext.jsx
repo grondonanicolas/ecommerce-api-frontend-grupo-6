@@ -1,34 +1,54 @@
 /* eslint-disable react/prop-types */
 import { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 import { authenticate } from '../services/serviceLogin';
 import { signup as signupService } from '../services/serviceSignup';
-import { jwtDecode } from 'jwt-decode';
 
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(() => {
-    const savedUser = JSON.parse(localStorage.getItem('user'));
-    return savedUser || null;
-  });
+  const navigate = useNavigate();
 
   const [token, setToken] = useState(
     () => localStorage.getItem('token') || null
   );
+
+  const [user, setUser] = useState(() => {
+    const savedToken = localStorage.getItem('token');
+    if (savedToken) {
+      try {
+        const decodedToken = jwtDecode(savedToken);
+        return {
+          firstName: decodedToken.firstName,
+          lastName: decodedToken.lastName,
+          email: decodedToken.email,
+          role: decodedToken.role,
+          image: decodedToken.image,
+          isAdmin: decodedToken.role === 'ADMIN',
+        };
+      } catch (error) {
+        console.error('Error decoding token:', error);
+        return null;
+      }
+    }
+    return null;
+  });
+
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   const login = async ({ email, username, password }) => {
     try {
-      const { token } = await authenticate({ email, username, password });
+      const response = await authenticate({ email, username, password });
+      const receivedToken = response.token;
 
-      if (typeof token !== 'string') {
-        console.error('Invalid token:', token);
+      if (typeof receivedToken !== 'string') {
+        console.error('Invalid token:', receivedToken);
+        setError('Token inválido recibido del servidor.');
         return;
       }
 
-      const decodedToken = jwtDecode(token);
+      const decodedToken = jwtDecode(receivedToken);
 
       const userData = {
         firstName: decodedToken.firstName,
@@ -40,8 +60,8 @@ export function AuthProvider({ children }) {
       };
 
       setUser(userData);
-      setToken(token);
-      localStorage.setItem('token', token);
+      setToken(receivedToken);
+      localStorage.setItem('token', receivedToken);
       navigate('/');
     } catch (err) {
       console.error(err);
@@ -60,23 +80,37 @@ export function AuthProvider({ children }) {
     role
   ) => {
     try {
-      const { access_token } = await signupService(
+      const response = await signupService(
         userName,
         firstName,
         lastName,
         email,
         password,
         birthDate,
-        image, 
+        image,
         role
       );
+      const receivedToken = response.access_token;
 
-      if (!access_token) {
+      if (!receivedToken) {
         throw new Error('Error en el registro. Intente de nuevo.');
       }
 
-      setToken(access_token);
-      localStorage.setItem('token', access_token);
+      const decodedToken = jwtDecode(receivedToken);
+
+      const userData = {
+        firstName: decodedToken.firstName,
+        lastName: decodedToken.lastName,
+        email: decodedToken.email,
+        role: decodedToken.role,
+        image: decodedToken.image,
+        isAdmin: decodedToken.role === 'ADMIN',
+      };
+
+      setUser(userData);
+      setToken(receivedToken);
+      localStorage.setItem('token', receivedToken);
+      navigate('/');
     } catch (err) {
       console.error(err);
       setError(err.message || 'Error en el registro. Intente de nuevo.');
@@ -86,9 +120,7 @@ export function AuthProvider({ children }) {
   const logout = () => {
     setUser(null);
     setToken(null);
-    localStorage.removeItem('user');
     localStorage.removeItem('token');
-    // TODO: Tirar un toast de que se cerró sesión y sacar este navigate
     navigate('/login');
   };
 
