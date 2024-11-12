@@ -18,6 +18,8 @@ export default function UserProductsHistoric() {
           fontWeight="bold"
           gutterBottom
           justifyContent={'center'}
+          marginBottom={2}
+          marginTop={5}
         >
           Historial
         </Typography>

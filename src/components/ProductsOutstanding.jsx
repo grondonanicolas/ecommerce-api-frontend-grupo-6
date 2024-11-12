@@ -25,6 +25,7 @@ export default function ProductsOutstanding() {
           fontWeight="bold"
           gutterBottom
           justifyContent={'center'}
+          marginBottom={2}
         >
           Productos destacados
         </Typography>

@@ -25,8 +25,8 @@ const CategoryGrid = () => {
 
   if (categories) {
     return (
-      <Box marginTop={5} marginBottom={6}>
-        <Box marginBottom={5}>
+      <Box marginBottom={6}>
+        <Box marginBottom={3.5}>
           <Typography
             variant="h4"
             fontWeight="bold"
