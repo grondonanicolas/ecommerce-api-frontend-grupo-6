@@ -57,7 +57,15 @@ const CartItem = ({
           </Typography>
         </Box>
       </Box>
-      <Box display="flex" alignItems="center" gap={1} sx={{ minWidth: 0 }}>
+      <Box
+        display="flex"
+        alignItems="center"
+        gap={1}
+        sx={{
+          minWidth: 0,
+          marginLeft: 2.5,
+        }}
+      >
         <Box
           display="flex"
           alignItems="center"
@@ -66,7 +74,7 @@ const CartItem = ({
             backgroundColor: 'grey.100',
             padding: '2px 4px',
             borderRadius: '20px',
-            minWidth: 0,
+            minWidth: '85px',
           }}
         >
           <IconButton
@@ -75,7 +83,11 @@ const CartItem = ({
           >
             <RemoveIcon fontSize="small" />
           </IconButton>
-          <Typography variant="body1" noWrap>
+          <Typography
+            variant="body1"
+            noWrap
+            sx={{ minWidth: '24px', textAlign: 'center' }}
+          >
             {quantity}
           </Typography>
           <IconButton
