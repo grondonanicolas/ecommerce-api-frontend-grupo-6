@@ -17,6 +17,7 @@ const CartItem = ({
     <Box
       display="flex"
       alignItems="center"
+      gap={2}
       justifyContent="space-between"
       p={2}
       sx={{
@@ -27,7 +28,7 @@ const CartItem = ({
       <Box
         display="flex"
         alignItems="center"
-        gap={1}
+        gap={2}
         sx={{ minWidth: 0, flexGrow: 1 }}
       >
         <Box
@@ -68,7 +69,6 @@ const CartItem = ({
         gap={1}
         sx={{
           minWidth: 0,
-          marginLeft: 2.5,
         }}
       >
         <Box
