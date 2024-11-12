@@ -3,12 +3,23 @@ import {
   ShoppingCart as ShoppingCartIcon,
   AccountCircle as AccountCircleIcon,
 } from '@mui/icons-material';
-// import SearchBar from './SearchBar';
 
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 const NavBar = () => {
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+
+  const handleAuthenticatedNavigation = (path) => {
+    if (!user) {
+      navigate('/login');
+    } else {
+      navigate(path);
+    }
+  };
+
   return (
     <AppBar
       position="static"
@@ -25,9 +36,8 @@ const NavBar = () => {
             display: { xs: 'none', sm: 'block' },
             fontWeight: 'bold',
             minWidth: '100px',
-            cursor: "pointer",
-            '&:hover':{
-            }
+            cursor: 'pointer',
+            '&:hover': {},
           }}
           onClick={() => {
             navigate('/');
@@ -56,7 +66,6 @@ const NavBar = () => {
               cursor: 'pointer',
               mr: 1,
             }}
-            
           >
             Catálogo
           </Typography>
@@ -64,9 +73,8 @@ const NavBar = () => {
             color="black"
             variant="body1"
             component="div"
-            onClick={() => navigate('user/favourites')}
-            sx={{cursor: "pointer"}}
-
+            onClick={() => handleAuthenticatedNavigation('user/favourites')}
+            sx={{ cursor: 'pointer' }}
           >
             Favoritos
           </Typography>
@@ -76,12 +84,17 @@ const NavBar = () => {
           color="black"
           size="large"
           edge="end"
-          onClick={() => navigate('/cart')}
+          onClick={() => handleAuthenticatedNavigation('/cart')}
           sx={{ mr: 0.5 }}
         >
           <ShoppingCartIcon />
         </IconButton>
-        <IconButton size="large" edge="end" color="black">
+        <IconButton
+          size="large"
+          edge="end"
+          color="black"
+          onClick={() => handleAuthenticatedNavigation('/profile')}
+        >
           <AccountCircleIcon />
         </IconButton>
       </Toolbar>
