@@ -1,7 +1,13 @@
+import SignupForm from '../../../components/SignupForm';
+import {  Typography } from '@mui/material';
+
 const UserAdmin = () => {
   return (
     <div>
-      <h1>User Admin</h1>
+        <Typography variant="h4" gutterBottom sx={{ textAlign: 'center' }}>
+          Crear usuarios
+        </Typography>
+      <SignupForm isAdmin={true} />
     </div>
   );
 };

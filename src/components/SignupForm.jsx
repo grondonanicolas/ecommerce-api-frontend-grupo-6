@@ -1,13 +1,14 @@
 import { useState, useContext } from 'react';
-import { Box, TextField, Typography, Button, Link } from '@mui/material';
+import { Box, TextField, Typography, Button, MenuItem } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
 import CakeIcon from '@mui/icons-material/Cake';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-const SignupForm = () => {
-  const { signup, error } = useContext(AuthContext); // Usa la función signup del contexto
+
+const SignupForm = ({ isAdmin = false }) => { 
+  const { signup, error } = useContext(AuthContext); 
   const [formData, setFormData] = useState({
     userName: '',
     firstName: '',
@@ -16,6 +17,8 @@ const SignupForm = () => {
     password: '',
     confirmPassword: '',
     birthDate: '',
+    profilePic: '', // Nuevo campo para la URL de la imagen de perfil
+    role: 'USER', 
   });
   const [localError, setLocalError] = useState(null);
   const navigate = useNavigate();
@@ -30,21 +33,21 @@ const SignupForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validación de contraseñas
     if (formData.password !== formData.confirmPassword) {
       setLocalError('Passwords do not match.');
       return;
     }
 
     try {
-      // Llama a la función signup de AuthContext
       await signup(
         formData.userName,
         formData.firstName,
         formData.lastName,
         formData.email,
         formData.password,
-        formData.birthDate
+        formData.birthDate,
+        formData.profilePic,
+        formData.role,
       );
     } catch {
       setLocalError('Error en el registro. Intente de nuevo.');
@@ -62,30 +65,33 @@ const SignupForm = () => {
         gap: 2,
       }}
     >
-      <Typography variant="h4" fontWeight="bold" gutterBottom>
-        Registro
-      </Typography>
-      <Typography variant="body1" color="text.secondary" gutterBottom>
-        Por favor, completa con tus datos abajo (o{' '}
-        <Typography
-          component="span"
-          variant="body1"
-          sx={{
-            fontWeight: 'bold',
-            color: 'black',
-            cursor: 'pointer',
-            '&:hover': { color: '#535bf2' },
-            textDecoration: 'underline',
-            transition: 'color 0.3s ease',
-          }}
-          onClick={() => navigate(-1)}
-        >
-          volvé a donde estabas
-        </Typography>
-        ):
-      </Typography>
+      {!isAdmin && (
+        <>
+          <Typography variant="h4" fontWeight="bold" gutterBottom>
+            Registro
+          </Typography>
+          <Typography variant="body1" color="text.secondary" gutterBottom>
+            Por favor, completa con tus datos abajo (o{' '}
+            <Typography
+              component="span"
+              variant="body1"
+              sx={{
+                fontWeight: 'bold',
+                color: 'black',
+                cursor: 'pointer',
+                '&:hover': { color: '#535bf2' },
+                textDecoration: 'underline',
+                transition: 'color 0.3s ease',
+              }}
+              onClick={() => navigate(-1)}
+            >
+              volvé a donde estabas
+            </Typography>
+            ):
+          </Typography>
+        </>
+      )}
 
-      {/* Username */}
       <TextField
         name="userName"
         placeholder="Nickname de usuario"
@@ -104,7 +110,6 @@ const SignupForm = () => {
         }}
       />
 
-      {/* First Name */}
       <TextField
         name="firstName"
         placeholder="Nombre/s"
@@ -123,7 +128,6 @@ const SignupForm = () => {
         }}
       />
 
-      {/* Last Name */}
       <TextField
         name="lastName"
         placeholder="Apellido/s"
@@ -142,7 +146,6 @@ const SignupForm = () => {
         }}
       />
 
-      {/* Email */}
       <TextField
         name="email"
         placeholder="E-mail"
@@ -159,7 +162,6 @@ const SignupForm = () => {
         }}
       />
 
-      {/* Password */}
       <TextField
         name="password"
         type="password"
@@ -177,7 +179,6 @@ const SignupForm = () => {
         }}
       />
 
-      {/* Confirm Password */}
       <TextField
         name="confirmPassword"
         type="password"
@@ -195,7 +196,6 @@ const SignupForm = () => {
         }}
       />
 
-      {/* Birthdate */}
       <TextField
         name="birthDate"
         type="date"
@@ -215,7 +215,42 @@ const SignupForm = () => {
         }}
       />
 
-      {/* Botón de envío */}
+      {isAdmin && (
+        <TextField
+          select
+          name="role"
+          label="Rol de usuario"
+          value={formData.role}
+          onChange={handleChange}
+          variant="outlined"
+          fullWidth
+          sx={{
+            backgroundColor: 'grey.100',
+            borderRadius: '10px',
+          }}
+        >
+          <MenuItem value="USER">Usuario</MenuItem>
+          <MenuItem value="ADMIN">Administrador</MenuItem>
+        </TextField>
+      )}
+
+      {/* Campo para la URL de la imagen de perfil */}
+      <TextField
+        name="profilePic"
+        placeholder="URL de la imagen de perfil"
+        value={formData.profilePic}
+        onChange={handleChange}
+        variant="outlined"
+        fullWidth
+        InputProps={{
+          startAdornment: <AccountCircleIcon color="action" sx={{ marginRight: 1 }} />,
+        }}
+        sx={{
+          backgroundColor: 'grey.100',
+          borderRadius: '10px',
+        }}
+      />
+
       <Button
         variant="contained"
         color="primary"
@@ -234,35 +269,11 @@ const SignupForm = () => {
         Crear cuenta
       </Button>
 
-      {/* Muestra el error si existe */}
       {(localError || error) && (
         <Typography color="error" variant="body2" sx={{ mt: 1 }}>
           {localError || error}
         </Typography>
       )}
-
-      {/* Enlaces de pie de página */}
-      <Box display="flex" justifyContent="center" mt={2}>
-        <Typography variant="body2" color="text.secondary" mr={1}>
-          ¿Ya estás registrado?
-        </Typography>
-        <Box display="flex" justifyContent="center">
-          <Typography
-            variant="body2"
-            sx={{
-              fontWeight: 'bold',
-              color: 'black',
-              cursor: 'pointer',
-              '&:hover': { color: '#535bf2' },
-              textDecoration: 'underline',
-              transition: 'color 0.3s ease',
-            }}
-            onClick={() => navigate('/login')}
-          >
-            Inicia sesión
-          </Typography>
-        </Box>
-      </Box>
     </Box>
   );
 };

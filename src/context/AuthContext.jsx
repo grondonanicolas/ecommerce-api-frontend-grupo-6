@@ -58,7 +58,8 @@ export function AuthProvider({ children }) {
     email,
     password,
     birthDate,
-    image
+    image,
+    role
   ) => {
     try {
       const { access_token } = await signupService(
@@ -68,7 +69,8 @@ export function AuthProvider({ children }) {
         email,
         password,
         birthDate,
-        image
+        image, 
+        role
       );
 
       if (!access_token) {

@@ -6,7 +6,9 @@ export const signup = async (
   lastName,
   email,
   password,
-  birthDate
+  birthDate,
+  image,
+  role
 ) => {
   const response = await api.post('http://localhost:8080/register', {
     userName,
@@ -15,7 +17,8 @@ export const signup = async (
     email,
     password,
     birthDate,
-    role: 'USER',
+    image,
+    role
   });
 
   return response.data;

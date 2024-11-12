@@ -78,7 +78,7 @@ const CategoriesAdmin = () => {
 
   return (
     <Box>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom sx={{ textAlign: 'center' }}>
         Listado de Categorías
       </Typography>
       <Button
