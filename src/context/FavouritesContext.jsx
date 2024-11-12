@@ -44,7 +44,7 @@ function FavouritesContextProvider({ children }) {
   };
 
   const isFavouriteCheck = (productId) => {
-    return favourites.find((fav) => fav.id === productId);
+    return favourites?.find((fav) => fav.id === productId);
   };
 
   return (
