@@ -19,7 +19,7 @@ const Catalog = () => {
     isLoading,
   } = useSWR(
     {
-      url: `products`,
+      url: `products/all`,
     },
     FetcherSWR
   );
