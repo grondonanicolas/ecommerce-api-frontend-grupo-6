@@ -27,6 +27,7 @@ function SnackBarContextProvider({ children }) {
         open={openSnackbar}
         autoHideDuration={6000}
         onClose={() => onToggleOpenSnackbar(false)}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
         <Alert
           onClose={() => onToggleOpenSnackbar(false)}

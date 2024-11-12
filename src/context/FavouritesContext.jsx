@@ -38,9 +38,20 @@ function FavouritesContextProvider({ children }) {
     }
   };
 
-  const removeFavourite = (productId) => {
-    // const filteredFavourites = favourites.filter((fav) => fav.id !== productId);
-    // setFavourites(filteredFavourites);
+  const removeFavourite = async (productId) => {
+    try {
+      await mutate(
+        FetcherSWR({
+          url: `users/favourite`,
+          options: { method: 'delete', data: { productId } },
+        })
+      );
+      onSetSnachBarSeverity('success');
+      onSetSnackBarMessage('Producto eliminado de favoritos');
+      onToggleOpenSnackbar(true);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const isFavouriteCheck = (productId) => {
