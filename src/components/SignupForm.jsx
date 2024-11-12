@@ -66,7 +66,23 @@ const SignupForm = () => {
         Registro
       </Typography>
       <Typography variant="body1" color="text.secondary" gutterBottom>
-        Por favor, completa con tus datos abajo:
+        Por favor, completa con tus datos abajo (o{' '}
+        <Typography
+          component="span"
+          variant="body1"
+          sx={{
+            fontWeight: 'bold',
+            color: 'black',
+            cursor: 'pointer',
+            '&:hover': { color: '#535bf2' },
+            textDecoration: 'underline',
+            transition: 'color 0.3s ease',
+          }}
+          onClick={() => navigate(-1)}
+        >
+          volvé a donde estabas
+        </Typography>
+        ):
       </Typography>
 
       {/* Username */}
