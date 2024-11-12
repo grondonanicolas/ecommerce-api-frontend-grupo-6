@@ -13,7 +13,7 @@ const OrderSummary = ({
       sx={{
         width: '100%',
         maxWidth: '100%',
-        padding: 2,
+        padding: '0 16px 16px 16px',
         boxSizing: 'border-box',
       }}
     >
