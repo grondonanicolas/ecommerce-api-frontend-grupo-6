@@ -24,10 +24,11 @@ const NavBar = () => {
   const open = Boolean(anchorEl);
 
   const isAdmin = user && user.isAdmin;
+  const isLoggedIn = user && user.email;
 
   const shouldRenderAdminPanel = isAdmin;
-  const shouldIgnoreFavourites = isAdmin;
-  const shouldIgnoreCart = isAdmin;
+  const shouldIgnoreFavourites = isAdmin || !isLoggedIn;
+  const shouldIgnoreCart = isAdmin || !isLoggedIn;
   const shouldRenderProfileImage = user && user.image;
 
   const handleMenuOpen = (event) => {
