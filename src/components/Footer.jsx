@@ -7,17 +7,27 @@ const Footer = () => {
   return (
     <Box sx={{ backgroundColor: '#f9f9f9', padding: 4, marginTop: 8 }}>
       {/* Main Footer Section */}
-      <Grid2 container spacing={4}>
+      <Grid2 container spacing={4} justifyContent="center">
         {/* Company Info */}
-        <Grid2 xs={12} md={3}>
+        <Grid2
+          xs={12}
+          md={6}
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+        >
           <Typography variant="h5" sx={{ fontWeight: 'bold', color: 'black' }}>
             Sportify
           </Typography>
-          <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
-            We have clothes that suit your style and which you’re proud to wear.
-            From women to men.
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            sx={{ mt: 1.5, textAlign: 'center', maxWidth: '400px' }}
+          >
+            Elevamos tu rendimiento con estilo. Ropa deportiva premium para
+            hombres y mujeres que buscan la excelencia.
           </Typography>
-          <Box sx={{ mt: 2 }}>
+          <Box sx={{ mt: 1 }}>
             <IconButton>
               <TwitterIcon />
             </IconButton>
@@ -28,88 +38,6 @@ const Footer = () => {
               <InstagramIcon />
             </IconButton>
           </Box>
-        </Grid2>
-
-        {/* Links Sections */}
-        <Grid2 xs={12} md={2}>
-          <Typography
-            variant="subtitle1"
-            sx={{ fontWeight: 'bold', color: 'black', mb: 1 }}
-          >
-            COMPANY
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            About
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            Features
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            Works
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            Career
-          </Typography>
-        </Grid2>
-        <Grid2 xs={12} md={2}>
-          <Typography
-            variant="subtitle1"
-            sx={{ fontWeight: 'bold', color: 'black', mb: 1 }}
-          >
-            HELP
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            Customer Support
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            Delivery Details
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            Terms & Conditions
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            Privacy Policy
-          </Typography>
-        </Grid2>
-        <Grid2 xs={12} md={2}>
-          <Typography
-            variant="subtitle1"
-            sx={{ fontWeight: 'bold', color: 'black', mb: 1 }}
-          >
-            FAQ
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            Account
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            Manage Deliveries
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            Orders
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            Payments
-          </Typography>
-        </Grid2>
-        <Grid2 xs={12} md={2}>
-          <Typography
-            variant="subtitle1"
-            sx={{ fontWeight: 'bold', color: 'black', mb: 1 }}
-          >
-            RESOURCES
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            Free eBooks
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            Development Tutorial
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            How to - Blog
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            YouTube Playlist
-          </Typography>
         </Grid2>
       </Grid2>
 
@@ -126,7 +54,7 @@ const Footer = () => {
         }}
       >
         <Typography variant="body2" color="textSecondary">
-          Shop.co © 2000-2023, All Rights Reserved
+          Sportify © 2000-2024, todos los derechos reservados
         </Typography>
 
         {/* Payment Icons */}
