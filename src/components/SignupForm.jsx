@@ -6,8 +6,12 @@ import LockIcon from '@mui/icons-material/Lock';
 import CakeIcon from '@mui/icons-material/Cake';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { SnackBarContext } from '../context/SnackBarContext';
 
 const SignupForm = ({ isAdmin = false }) => { 
+  const { onToggleOpenSnackbar, onSetSnackBarMessage, onSetSnachBarSeverity } =
+  useContext(SnackBarContext);
+  
   const { signup, error } = useContext(AuthContext); 
   const [formData, setFormData] = useState({
     userName: '',
@@ -49,8 +53,19 @@ const SignupForm = ({ isAdmin = false }) => {
         formData.profilePic,
         formData.role,
       );
+      onSetSnachBarSeverity('success');
+      onSetSnackBarMessage('Usuario añadido.');
+      onToggleOpenSnackbar(true);
+
+      if (!isAdmin){
+        navigate('/');
+      }
     } catch {
       setLocalError('Error en el registro. Intente de nuevo.');
+      onSetSnackBarMessage(
+        'Hubo un problema al agregar el producto al carrito'
+      );
+      onSetSnachBarSeverity('error');
     }
   };
 

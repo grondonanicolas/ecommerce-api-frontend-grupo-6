@@ -41,9 +41,7 @@ export function AuthProvider({ children }) {
 
       setUser(userData);
       setToken(token);
-      localStorage.setItem('user', JSON.stringify(userData));
       localStorage.setItem('token', token);
-
       navigate('/');
     } catch (err) {
       console.error(err);
@@ -79,8 +77,6 @@ export function AuthProvider({ children }) {
 
       setToken(access_token);
       localStorage.setItem('token', access_token);
-
-      navigate('/');
     } catch (err) {
       console.error(err);
       setError(err.message || 'Error en el registro. Intente de nuevo.');
