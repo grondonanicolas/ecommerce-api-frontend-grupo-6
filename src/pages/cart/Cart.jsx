@@ -21,13 +21,22 @@ const Cart = () => {
   };
 
   if (data && items.length === 0 && !loadedData) {
-    const itemsFromService = data.productsInCart.map((product) => ({
-      id: product.productId,
-      imageUrl: product.imageUrl,
-      name: product.description,
-      price: product.pricePerUnit,
-      quantity: product.quantity,
-    }));
+    const itemsFromService = data.productsInCart.map((product) => {
+      const primaryPhoto = product.photos?.length
+        ? product.photos.reduce((minPhoto, currentPhoto) =>
+            currentPhoto.priority < minPhoto.priority ? currentPhoto : minPhoto
+          )
+        : null;
+
+      return {
+        id: product.productId,
+        imageUrl: primaryPhoto?.url,
+        name: product.description,
+        price: product.pricePerUnit,
+        quantity: product.quantity,
+      };
+    });
+
     setItems(itemsFromService);
     setLoadedData(true);
   }
