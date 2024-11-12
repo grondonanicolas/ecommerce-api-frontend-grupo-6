@@ -6,7 +6,8 @@ export default function useHistoric() {
     {
       url: 'users/historic',
     },
-    FetcherSWR
+    FetcherSWR,
+    {revalidateOnFocus: false, revalidateOnReconnect: true}
   );
 
   const AddProductToHistoric = async (productId) => {
