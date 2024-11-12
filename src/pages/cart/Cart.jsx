@@ -41,8 +41,8 @@ const Cart = () => {
     setLoadedData(true);
   }
 
-  if (error) return <div>Error al cargar el carrito</div>;
-  if (isLoading) return <div>Cargando...</div>;
+  if (error) return <div>Hubo un error al cargar tu carrito ❌</div>;
+  if (isLoading) return <div>Estamos cargando tu carrito... 🛒</div>;
 
   const handleQuantityChange = async (id, newQuantity) => {
     try {
@@ -145,8 +145,8 @@ const Cart = () => {
           </h1>
         </Box>
 
-        {error && <div>Error al cargar el carrito</div>}
-        {isLoading && <div>Cargando...</div>}
+        {error && <div>Hubo un error al cargar tu carrito ❌</div>}
+        {isLoading && <div>Estamos cargando tu carrito... 🛒</div>}
 
         {data && items.length > 0 ? (
           <div
