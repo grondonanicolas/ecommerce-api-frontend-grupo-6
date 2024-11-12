@@ -10,7 +10,7 @@ const FetcherSWR = async ({ url, options }) => {
   const bearerToken = window.localStorage.getItem('token');
 
   const headers = {
-    Authorization: `Bearer ${bearerToken}`,
+    ...(bearerToken && { Authorization: `Bearer ${bearerToken}` }),
     'Content-Type': 'application/json',
   };
 

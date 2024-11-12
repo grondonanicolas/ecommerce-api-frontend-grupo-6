@@ -15,7 +15,11 @@ import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import { FavouritesContext } from '../context/FavouritesContext';
-
+import { AuthContext } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { mutate } from 'swr';
+import FetcherSWR from '../utils/fetcherSWR';
+import { SnackBarContext } from '../context/SnackBarContext';
 const sizes = ['XS', 'S', 'M', 'L', 'XL'];
 
 const ItemDetail = ({
@@ -26,9 +30,13 @@ const ItemDetail = ({
   descripcion,
   productId,
 }) => {
+  const navigate = useNavigate();
   const [selectedSize, setSelectedSize] = useState(null);
   const [isFavourite, setIsFavourite] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const { user } = useContext(AuthContext);
+  const { onToggleOpenSnackbar, onSetSnackBarMessage, onSetSnachBarSeverity } =
+    useContext(SnackBarContext);
 
   const images = Array.isArray(photos) ? photos : [photos];
 
@@ -39,7 +47,12 @@ const ItemDetail = ({
     setSelectedSize(newSize);
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
+    if (!user) {
+      alert('Debes iniciar sesión para agregar productos al carrito');
+      navigate('/login');
+      return;
+    }
     if (!selectedSize) {
       alert('Por favor selecciona un talle');
       return;
@@ -151,21 +164,23 @@ const ItemDetail = ({
                   borderRadius: '8px',
                 }}
               />
-              <IconButton
-                sx={{
-                  position: 'absolute',
-                  top: 8,
-                  right: 8,
-                  backgroundColor: 'white',
-                  boxShadow: 1,
-                  '&:hover': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                  },
-                }}
-                onClick={()=> handleFavourite()}
-              >
-                {isFavourite ? <StarIcon /> : <StarBorderIcon />}
-              </IconButton>
+              {user && (
+                <IconButton
+                  sx={{
+                    position: 'absolute',
+                    top: 8,
+                    right: 8,
+                    backgroundColor: 'white',
+                    boxShadow: 1,
+                    '&:hover': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                    },
+                  }}
+                  onClick={() => handleFavourite()}
+                >
+                  {isFavourite ? <StarIcon /> : <StarBorderIcon />}
+                </IconButton>
+              )}
             </Box>
           </Box>
         </Grid>
