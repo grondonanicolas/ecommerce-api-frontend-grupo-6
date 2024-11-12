@@ -15,7 +15,7 @@ const Cart = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (data) {
+    if (data && data.productsInCart) {
       const itemsFromService = data.productsInCart.map((product) => {
         const primaryPhoto = product.photos?.length
           ? product.photos.reduce((minPhoto, currentPhoto) =>
@@ -35,6 +35,8 @@ const Cart = () => {
       });
 
       setItems(itemsFromService);
+    } else {
+      setItems([]);
     }
   }, [data]);
 
