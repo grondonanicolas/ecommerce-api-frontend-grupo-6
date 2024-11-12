@@ -5,7 +5,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
 import CakeIcon from '@mui/icons-material/Cake';
 import { AuthContext } from '../context/AuthContext';
-
+import { useNavigate } from 'react-router-dom';
 const SignupForm = () => {
   const { signup, error } = useContext(AuthContext); // Usa la función signup del contexto
   const [formData, setFormData] = useState({
@@ -18,6 +18,7 @@ const SignupForm = () => {
     birthDate: '',
   });
   const [localError, setLocalError] = useState(null);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -226,16 +227,25 @@ const SignupForm = () => {
 
       {/* Enlaces de pie de página */}
       <Box display="flex" justifyContent="center" mt={2}>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.secondary" mr={1}>
           Already have an account?
         </Typography>
-        <Link
-          href="#"
-          variant="body2"
-          sx={{ marginLeft: 0.5, fontWeight: 'bold', color: 'black' }}
-        >
-          Log in here
-        </Link>
+        <Box display="flex" justifyContent="center">
+          <Typography
+            variant="body2"
+            sx={{
+              fontWeight: 'bold',
+              color: 'black',
+              cursor: 'pointer',
+              '&:hover': { color: '#535bf2' },
+              textDecoration: 'underline',
+              transition: 'color 0.3s ease',
+            }}
+            onClick={() => navigate('/login')}
+          >
+            Log in here
+          </Typography>
+        </Box>
       </Box>
     </Box>
   );

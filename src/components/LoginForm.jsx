@@ -3,9 +3,11 @@ import { Box, TextField, Typography, Button, Link } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
 import { AuthContext } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const { login, error } = useContext(AuthContext); //  función login del contexto
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -102,17 +104,21 @@ const LoginForm = () => {
         Next
       </Button>
 
-      <Box display="flex" justifyContent="space-between" mt={2}>
-        <Link href="#" variant="body2" color="text.secondary">
-          Forgot your password?
-        </Link>
-        <Link
-          href="#"
+      <Box display="flex" justifyContent="center">
+        <Typography
           variant="body2"
-          sx={{ fontWeight: 'bold', color: 'black' }}
+          sx={{
+            fontWeight: 'bold',
+            color: 'black',
+            cursor: 'pointer',
+            '&:hover': { color: '#535bf2' },
+            textDecoration: 'underline',
+            transition: 'color 0.3s ease',
+          }}
+          onClick={() => navigate('/signup')}
         >
           Create an account
-        </Link>
+        </Typography>
       </Box>
     </Box>
   );
