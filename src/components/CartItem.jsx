@@ -3,6 +3,7 @@ import { Box, Typography, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import fallbackImage from '../assets/product-placeholder.svg';
 
 const CartItem = ({
   imageUrl,
@@ -33,6 +34,10 @@ const CartItem = ({
           component="img"
           src={imageUrl}
           alt={name}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = fallbackImage;
+          }}
           sx={{
             width: 80,
             height: 80,
