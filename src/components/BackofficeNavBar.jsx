@@ -1,9 +1,41 @@
-import { AppBar, Toolbar, Typography, IconButton, Box } from '@mui/material';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../context/AuthContext';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Box,
+  Menu,
+  MenuItem,
+  Avatar,
+} from '@mui/material';
 import { AccountCircle as AccountCircleIcon } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
 const BackofficeNavBar = () => {
   const navigate = useNavigate();
+  const { user, logout } = useContext(AuthContext);
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleMenuOpen = (event) => {
+    if (!user) {
+      navigate('/login');
+    } else {
+      setAnchorEl(event.currentTarget);
+    }
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleMenuItemClick = (path) => {
+    navigate(path);
+    handleMenuClose();
+  };
 
   return (
     <AppBar
@@ -21,6 +53,13 @@ const BackofficeNavBar = () => {
             display: { xs: 'none', sm: 'block' },
             fontWeight: 'bold',
             minWidth: '100px',
+            cursor: 'pointer',
+            '&:hover': {
+              opacity: 0.8,
+            },
+          }}
+          onClick={() => {
+            navigate('/');
           }}
         >
           Sportify
@@ -29,7 +68,7 @@ const BackofficeNavBar = () => {
           sx={{
             flexGrow: 1,
             display: 'flex',
-            justifyContent: 'center',
+            justifyContent: 'right',
             gap: 3,
             m: 2,
           }}
@@ -71,9 +110,52 @@ const BackofficeNavBar = () => {
             </Typography>
           </Box>
         </Box>
-        <IconButton size="large" edge="end" color="black">
-          <AccountCircleIcon />
+        <IconButton
+          size="large"
+          edge="end"
+          color="black"
+          onClick={handleMenuOpen}
+        >
+          {user && user.image ? (
+            <Avatar
+              src={user.image}
+              alt={user.name}
+              sx={{ width: 32, height: 32 }}
+            />
+          ) : (
+            <AccountCircleIcon />
+          )}
         </IconButton>
+        <Menu
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleMenuClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+        >
+          <MenuItem onClick={() => handleMenuItemClick('/user/profile')}>
+            Profile
+          </MenuItem>
+          {user && user.isAdmin && (
+            <MenuItem onClick={() => handleMenuItemClick('/admin/products')}>
+              Admin Panel
+            </MenuItem>
+          )}
+          <MenuItem
+            onClick={() => {
+              logout();
+              handleMenuClose();
+            }}
+          >
+            Logout
+          </MenuItem>
+        </Menu>
       </Toolbar>
     </AppBar>
   );

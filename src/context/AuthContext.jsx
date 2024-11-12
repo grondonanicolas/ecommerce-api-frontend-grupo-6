@@ -36,6 +36,7 @@ export function AuthProvider({ children }) {
         email: decodedToken.email,
         role: decodedToken.role,
         image: decodedToken.image,
+        isAdmin: decodedToken.role === 'ADMIN',
       };
 
       setUser(userData);
@@ -89,6 +90,7 @@ export function AuthProvider({ children }) {
     setToken(null);
     localStorage.removeItem('user');
     localStorage.removeItem('token');
+    // TODO: Tirar un toast de que se cerró sesión y sacar este navigate
     navigate('/login');
   };
 
