@@ -1,6 +1,6 @@
 import useSWR, { mutate } from 'swr';
 import CartItemList from '../../components/CartItemList.jsx';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import OrderSummary from '../../components/OrderSummary.jsx';
 import { Box, Button, Modal, Typography } from '@mui/material';
 import FetcherSWR from '../../utils/fetcherSWR.js';
@@ -10,36 +10,38 @@ import { useNavigate } from 'react-router-dom';
 const Cart = () => {
   const { data, error, isLoading } = useSWR({ url: 'cart' }, FetcherSWR);
   const [items, setItems] = useState([]);
-  const [loadedData, setLoadedData] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (data) {
+      const itemsFromService = data.productsInCart.map((product) => {
+        const primaryPhoto = product.photos?.length
+          ? product.photos.reduce((minPhoto, currentPhoto) =>
+              currentPhoto.priority < minPhoto.priority
+                ? currentPhoto
+                : minPhoto
+            )
+          : null;
+
+        return {
+          id: product.productId,
+          imageUrl: primaryPhoto?.url,
+          name: product.description,
+          price: product.pricePerUnit,
+          quantity: product.quantity,
+        };
+      });
+
+      setItems(itemsFromService);
+    }
+  }, [data]);
 
   const handleCloseModal = () => {
     setOpenModal(false);
     navigate('/');
   };
-
-  if (data && items.length === 0 && !loadedData) {
-    const itemsFromService = data.productsInCart.map((product) => {
-      const primaryPhoto = product.photos?.length
-        ? product.photos.reduce((minPhoto, currentPhoto) =>
-            currentPhoto.priority < minPhoto.priority ? currentPhoto : minPhoto
-          )
-        : null;
-
-      return {
-        id: product.productId,
-        imageUrl: primaryPhoto?.url,
-        name: product.description,
-        price: product.pricePerUnit,
-        quantity: product.quantity,
-      };
-    });
-
-    setItems(itemsFromService);
-    setLoadedData(true);
-  }
 
   if (error) return <div>Hubo un error al cargar tu carrito ❌</div>;
   if (isLoading) return <div>Estamos cargando tu carrito... 🛒</div>;
@@ -118,7 +120,6 @@ const Cart = () => {
 
       await mutate({ url: 'cart' });
       setItems([]);
-      setLoadedData(false);
       setOpenModal(true);
     } catch (error) {
       console.error('Error al realizar el checkout:', error);
