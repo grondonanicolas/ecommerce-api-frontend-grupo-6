@@ -45,7 +45,13 @@ const Cart = () => {
     navigate('/');
   };
 
-  if (error) return <div>Hubo un error al cargar tu carrito ❌</div>;
+  if (error)
+    return (
+      <div>
+        Hubo un problema con tu carrito, ¡ya estamos trabajando para
+        solucionarlo! 🛠️
+      </div>
+    );
   if (isLoading) return <div>Estamos cargando tu carrito... 🛒</div>;
 
   const handleQuantityChange = async (id, newQuantity) => {
@@ -143,7 +149,12 @@ const Cart = () => {
           </Typography>
         </Box>
 
-        {error && <div>Hubo un error al cargar tu carrito ❌</div>}
+        {error && (
+          <div>
+            Hubo un problema con tu carrito, ¡ya estamos trabajando para
+            solucionarlo! 🛠️
+          </div>
+        )}
         {isLoading && <div>Estamos cargando tu carrito... 🛒</div>}
 
         {data && items.length > 0 ? (
