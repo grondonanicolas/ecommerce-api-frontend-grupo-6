@@ -57,7 +57,41 @@ const ItemDetail = ({
       alert('Por favor selecciona un talle');
       return;
     }
-    console.log('Agregado al carrito:', { title, price, size: selectedSize });
+
+    try {
+      await mutate(
+        { url: 'cart/products' },
+        FetcherSWR({
+          url: 'cart/products',
+          options: {
+            method: 'post',
+            data: {
+              productId: productId,
+              quantity: 1,
+            },
+          },
+        })
+      );
+      onSetSnachBarSeverity('success');
+      onSetSnackBarMessage('Producto agregado al carrito');
+      onToggleOpenSnackbar(true);
+    } catch (error) {
+      console.log(error);
+      if (
+        error.response.data.message ===
+        'El producto ya existe dentro del carrito'
+      ) {
+        onSetSnackBarMessage('Ya agregaste este producto al carrito');
+        onSetSnachBarSeverity('warning');
+      } else {
+        onSetSnackBarMessage(
+          'Hubo un problema al agregar el producto al carrito'
+        );
+        onSetSnachBarSeverity('error');
+      }
+
+      onToggleOpenSnackbar(true);
+    }
   };
 
   const formatPrice = (price) => {
