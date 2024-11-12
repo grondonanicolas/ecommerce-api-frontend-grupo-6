@@ -71,7 +71,12 @@ const NavBar = () => {
           </Typography>
         </Box>
         {/* <SearchBar /> */}
-        <IconButton color="black" size="large" edge="end">
+        <IconButton
+          color="black"
+          size="large"
+          edge="end"
+          onClick={() => navigate('/cart')}
+        >
           <ShoppingCartIcon />
         </IconButton>
         <IconButton size="large" edge="end" color="black">
