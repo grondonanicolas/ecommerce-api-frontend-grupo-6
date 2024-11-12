@@ -19,9 +19,9 @@ export function AuthProvider({ children }) {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const login = async (email, password) => {
+  const login = async ({ email, username, password }) => {
     try {
-      const { token } = await authenticate(email, password);
+      const { token } = await authenticate({ email, username, password });
 
       if (typeof token !== 'string') {
         console.error('Invalid token:', token);

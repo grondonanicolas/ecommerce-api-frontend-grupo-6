@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { Box, TextField, Typography, Button, Link } from '@mui/material';
+import { Box, TextField, Typography, Button } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
 import { AuthContext } from '../context/AuthContext';
@@ -22,8 +22,20 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const isEmail = formData.email.includes('@');
     try {
-      await login(formData.email, formData.password); // Llama a login con los datos del formulario
+      if (isEmail) {
+        await login({
+          email: formData.email,
+          password: formData.password,
+        });
+      } else {
+        await login({
+          username: formData.email,
+          password: formData.password,
+        });
+      }
+      // await login(formData.email, formData.password); // Llama a login con los datos del formulario
     } catch (err) {
       console.error('Error al iniciar sesión:', err.message);
     }
