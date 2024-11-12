@@ -63,16 +63,16 @@ const SignupForm = () => {
       }}
     >
       <Typography variant="h4" fontWeight="bold" gutterBottom>
-        Sign Up
+        Registro
       </Typography>
       <Typography variant="body1" color="text.secondary" gutterBottom>
-        Please fill your information below
+        Por favor, completa con tus datos abajo:
       </Typography>
 
       {/* Username */}
       <TextField
         name="userName"
-        placeholder="Username"
+        placeholder="Nickname de usuario"
         value={formData.userName}
         onChange={handleChange}
         variant="outlined"
@@ -91,7 +91,7 @@ const SignupForm = () => {
       {/* First Name */}
       <TextField
         name="firstName"
-        placeholder="First Name"
+        placeholder="Nombre/s"
         value={formData.firstName}
         onChange={handleChange}
         variant="outlined"
@@ -110,7 +110,7 @@ const SignupForm = () => {
       {/* Last Name */}
       <TextField
         name="lastName"
-        placeholder="Last Name"
+        placeholder="Apellido/s"
         value={formData.lastName}
         onChange={handleChange}
         variant="outlined"
@@ -147,7 +147,7 @@ const SignupForm = () => {
       <TextField
         name="password"
         type="password"
-        placeholder="Password"
+        placeholder="Contraseña"
         value={formData.password}
         onChange={handleChange}
         variant="outlined"
@@ -165,7 +165,7 @@ const SignupForm = () => {
       <TextField
         name="confirmPassword"
         type="password"
-        placeholder="Confirm Password"
+        placeholder="Confirmá tu contraseña"
         value={formData.confirmPassword}
         onChange={handleChange}
         variant="outlined"
@@ -215,7 +215,7 @@ const SignupForm = () => {
         }}
         fullWidth
       >
-        Register
+        Crear cuenta
       </Button>
 
       {/* Muestra el error si existe */}
@@ -228,7 +228,7 @@ const SignupForm = () => {
       {/* Enlaces de pie de página */}
       <Box display="flex" justifyContent="center" mt={2}>
         <Typography variant="body2" color="text.secondary" mr={1}>
-          Already have an account?
+          ¿Ya estás registrado?
         </Typography>
         <Box display="flex" justifyContent="center">
           <Typography
@@ -243,7 +243,7 @@ const SignupForm = () => {
             }}
             onClick={() => navigate('/login')}
           >
-            Log in here
+            Inicia sesión
           </Typography>
         </Box>
       </Box>

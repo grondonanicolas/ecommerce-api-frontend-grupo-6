@@ -41,10 +41,10 @@ const LoginForm = () => {
       }}
     >
       <Typography variant="h4" fontWeight="bold" gutterBottom>
-        Sign In
+        Inicia sesión
       </Typography>
       <Typography variant="body1" color="text.secondary" gutterBottom>
-        Please fill your information below
+        Por favor, completa con tus datos abajo:
       </Typography>
 
       {error && (
@@ -72,7 +72,7 @@ const LoginForm = () => {
       <TextField
         name="password"
         type="password"
-        placeholder="Password"
+        placeholder="Contraseña"
         value={formData.password}
         onChange={handleChange}
         variant="outlined"
@@ -101,24 +101,29 @@ const LoginForm = () => {
         }}
         fullWidth
       >
-        Next
+        Ingresar
       </Button>
 
-      <Box display="flex" justifyContent="center">
-        <Typography
-          variant="body2"
-          sx={{
-            fontWeight: 'bold',
-            color: 'black',
-            cursor: 'pointer',
-            '&:hover': { color: '#535bf2' },
-            textDecoration: 'underline',
-            transition: 'color 0.3s ease',
-          }}
-          onClick={() => navigate('/signup')}
-        >
-          Create an account
+      <Box display="flex" justifyContent="center" mt={2}>
+        <Typography variant="body2" color="text.secondary" mr={1}>
+          ¿No tenés cuenta?
         </Typography>
+        <Box display="flex" justifyContent="center">
+          <Typography
+            variant="body2"
+            sx={{
+              fontWeight: 'bold',
+              color: 'black',
+              cursor: 'pointer',
+              '&:hover': { color: '#535bf2' },
+              textDecoration: 'underline',
+              transition: 'color 0.3s ease',
+            }}
+            onClick={() => navigate('/signup')}
+          >
+            Crea una gratis
+          </Typography>
+        </Box>
       </Box>
     </Box>
   );
