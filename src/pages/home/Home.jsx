@@ -10,10 +10,10 @@ const Home = () => {
         <ProductsOutstanding />
       </Box>
       <Box>
-        <UserProductsHistoric />
+        <CategoryGrid />
       </Box>
       <Box>
-        <CategoryGrid />
+        <UserProductsHistoric />
       </Box>
     </Stack>
   );

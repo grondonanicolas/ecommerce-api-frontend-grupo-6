@@ -15,7 +15,8 @@ const CategoryGrid = () => {
     {
       url: 'category',
     },
-    FetcherSWR
+    FetcherSWR,
+    {revalidateOnFocus: false}
   );
 
   if (isLoading) return <ItemGridSkeleton />;
@@ -24,7 +25,7 @@ const CategoryGrid = () => {
 
   if (categories) {
     return (
-      <>
+      <Box marginTop={5} marginBottom={6}>
         <Box marginBottom={5}>
           <Typography
             variant="h4"
@@ -64,12 +65,12 @@ const CategoryGrid = () => {
                   boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
                   cursor: 'pointer',
                 }}
+                onClick={() => {
+                  navigate(`/products/catalog?category=${item.category}`);
+                }}
               >
                 <Typography
                   style={{ fontSize: '20px', color: 'black' }}
-                  onClick={() => {
-                    navigate(`/products/catalog?category=${item.category}`);
-                  }}
                 >
                   {item.category}
                 </Typography>
@@ -77,7 +78,7 @@ const CategoryGrid = () => {
             </Box>
           ))}
         </Box>
-      </>
+      </Box>
     );
   }
 };

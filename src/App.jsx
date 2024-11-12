@@ -1,14 +1,14 @@
-import EcommerceContainer from './components/EcommerceContainer';
 import FavouritesContextProvider from './context/FavouritesContext';
+import SnackBarContextProvider from './context/SnackBarContext';
 import Router from './router/Router';
 
 const App = () => {
   return (
-    //  <EcommerceContainer>
-    <FavouritesContextProvider>
-      <Router />
-    </FavouritesContextProvider>
-    //  </EcommerceContainer>
+    <SnackBarContextProvider>
+      <FavouritesContextProvider>
+        <Router />
+      </FavouritesContextProvider>
+    </SnackBarContextProvider>
   );
 };
 
