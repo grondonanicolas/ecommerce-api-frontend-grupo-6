@@ -120,7 +120,7 @@ const ItemDetail = ({
                     }}
                   >
                     <img
-                      src={img}
+                      src={img.url}
                       alt={`${title} - imagen ${index + 1}`}
                       style={{
                         width: '100%',
@@ -138,16 +138,16 @@ const ItemDetail = ({
               sx={{
                 flexGrow: 1,
                 position: 'relative',
-                height: '100%',
+                height: '40vh',
               }}
             >
               <img
-                src={images[selectedImageIndex]}
+                src={images[selectedImageIndex]?.url}
                 alt={title || 'Producto'}
                 style={{
                   width: '100%',
                   height: '100%',
-                  objectFit: 'cover',
+                  objectFit: 'contain',
                   borderRadius: '8px',
                 }}
               />
