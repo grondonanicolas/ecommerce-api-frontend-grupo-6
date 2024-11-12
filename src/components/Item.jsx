@@ -73,14 +73,14 @@ const Item = ({ imageUrl, title, price, state, productId }) => {
             onClick={handleNavigateProducto}
             sx={{
               mt: 1,
-              backgroundColor: state ? 'primary.main' : 'secondary.main',
+              backgroundColor: state ? 'primary.main' : '#000',
               color: 'white',
               '&:hover': {
-                backgroundColor: state ? 'primary.light' : 'secondary.light',
+                backgroundColor: state ? 'primary.light' : '#333',
               },
             }}
           >
-            {state ? 'Editar' : 'Ver más'}
+            {state ? 'Editar' : 'Ver detalle'}
           </Button>
         </Box>
       </CardContent>
