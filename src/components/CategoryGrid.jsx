@@ -42,7 +42,7 @@ const CategoryGrid = () => {
             justifyContent: 'center',
           }}
         >
-          {categories?.map((item) => (
+          {categories?.slice(0, 5).map((item) => (
             <Box
               key={item.id}
               sx={{

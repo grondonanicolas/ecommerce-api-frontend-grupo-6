@@ -28,7 +28,7 @@ export default function ProductsOutstanding() {
         >
           Productos destacados
         </Typography>
-        <ItemGrid items={data} />
+        <ItemGrid items={data.slice(0, 7)} />
       </Box>
     );
   }
