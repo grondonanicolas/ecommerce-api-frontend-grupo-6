@@ -132,19 +132,13 @@ const Cart = () => {
         <Box
           sx={{
             borderBottom: '1px solid #e0e0e0',
-            marginBottom: '24px',
+            marginBottom: '60px',
             paddingBottom: '16px',
           }}
         >
-          <h1
-            style={{
-              margin: 0,
-              fontSize: '24px',
-              fontWeight: 'bold',
-            }}
-          >
+          <Typography variant="h4" fontWeight="bold" justifyContent={'center'}>
             Mi carrito de compras
-          </h1>
+          </Typography>
         </Box>
 
         {error && <div>Hubo un error al cargar tu carrito ❌</div>}
