@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from '../pages/home/Home';
 import SignUpPage from '../pages/auth/register/SignUpPage';
 import LoginPage from '../pages/auth/login/LoginPage';
-import Cart from '../pages/cart/Cart';
+import CartPage from '../pages/cart/CartPage';
 import Catalog from '../pages/products/catalog/Catalog';
 import Historic from '../pages/user/historic/Historic';
 import Product from '../pages/products/product/Product';
@@ -150,7 +150,7 @@ const router = createBrowserRouter([
             children: [
               {
                 path: '/cart',
-                element: <Cart />,
+                element: <CartPage />,
               },
               {
                 path: '/user',

@@ -3,7 +3,7 @@ import CartItemList from '../../components/CartItemList.jsx';
 import { useState } from 'react';
 import OrderSummary from '../../components/OrderSummary.jsx';
 import { Box, Button, Modal, Typography } from '@mui/material';
-import FetcherSWR from '../../utils/fetcherSWR';
+import FetcherSWR from '../../utils/fetcherSWR.js';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { useNavigate } from 'react-router-dom';
 
