@@ -45,6 +45,7 @@ const Cart = () => {
   if (isLoading) return <div>Estamos cargando tu carrito... 🛒</div>;
 
   const handleQuantityChange = async (id, newQuantity) => {
+    // todo: toast error
     try {
       await mutate(
         { url: `cart/products/${id}` },
