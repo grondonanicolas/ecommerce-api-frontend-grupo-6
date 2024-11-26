@@ -149,24 +149,20 @@ const router = createBrowserRouter([
             ],
           },
           {
-            element: <ProtectedRoute requiredRole="USER" />,
+            path: '/user',
             children: [
               {
-                path: '/cart',
-                element: <CartPage />,
+                path: 'profile',
+                element: (
+                  <Profile
+                    purchasedItemsHistory={purchasedItemListExampleData}
+                    user={userData}
+                  />
+                ),
               },
               {
-                path: '/user',
+                element: <ProtectedRoute requiredRole="USER" />,
                 children: [
-                  {
-                    path: 'profile',
-                    element: (
-                      <Profile
-                        purchasedItemsHistory={purchasedItemListExampleData}
-                        user={userData}
-                      />
-                    ),
-                  },
                   {
                     path: 'historic',
                     element: <Historic />,
@@ -176,6 +172,15 @@ const router = createBrowserRouter([
                     element: <Favourites />,
                   },
                 ],
+              },
+            ],
+          },
+          {
+            element: <ProtectedRoute requiredRole="USER" />,
+            children: [
+              {
+                path: '/cart',
+                element: <CartPage />,
               },
             ],
           },
