@@ -8,10 +8,11 @@ import ItemGridSkeleton from '../../../components/skeletons/ItemGridSkeleton';
 import { useSearchParams } from 'react-router-dom';
 
 const Catalog = () => {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const category = searchParams.get('category');
 
   const [fileteredProducts, setFilteredProducts] = useState([]);
+  const [categoryError, setCategoryError] = useState('');
 
   const {
     data: products,
@@ -32,13 +33,31 @@ const Catalog = () => {
   );
 
   useEffect(() => {
-    if (category && products) {
-      setFilteredProducts(products.filter((p) => p.category === category));
+    if (category && products && categories) {
+
+      const categoryExists = categories.some(cat => cat.category === category);
+      
+      if (!categoryExists) {
+        setCategoryError(`No existe la categoría "${category}"`);
+        setFilteredProducts([]);
+      } else {
+        setCategoryError('');
+        setFilteredProducts(products.filter((p) => p.category === category));
+      }
     }
-  }, [category, products]);
+  }, [category, products, categories]);
 
   const handleFilterByCategory = (categoryFilter) => {
-    setFilteredProducts(products.filter((p) => p.category === categoryFilter));
+    const filteredProducts = products.filter((p) => p.category == categoryFilter);
+    if(filteredProducts.length > 0){  
+      setFilteredProducts(filteredProducts);
+      setCategoryError('');
+      setSearchParams({ category: categoryFilter });
+    }else{
+      setCategoryError(`No existe la categoría "${categoryFilter}"`);
+      setFilteredProducts([]);
+      setSearchParams({});
+    }
   };
 
   if(error){
@@ -65,7 +84,9 @@ const Catalog = () => {
         )}
       </Box>
       <Box sx={{ width: '60%', margin: '0 auto'}}>
-        {fileteredProducts?.length > 0 ? (
+        {categoryError ? (
+          <p>{categoryError}</p>
+        ) : fileteredProducts?.length > 0 ? (
           <ItemGrid items={fileteredProducts} />
         ) : (
           <ItemGrid items={products} />
