@@ -10,7 +10,7 @@ import Profile from '../pages/user/profile/Profile';
 import ProductAdminBoard from '../pages/admin/products/ProductAdminBoard';
 import ProductCreate from '../pages/admin/products/ProductCreate';
 import ProductAdmin from '../pages/admin/products/ProductAdmin';
-// import ProtectedRoute from './ProtectedRoute';
+import ProtectedRoute from './ProtectedRoute';
 import NotFound from '../pages/not-found/NotFound';
 import AuthWrapper from './AuthWrapper';
 import UserAdmin from '../pages/admin/users/UserAdmin';
@@ -100,8 +100,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/admin',
-        element: <AdminContainer />,
-        // element: <ProtectedRoute requiredRole="ADMIN" />,
+        element: (
+          <ProtectedRoute requiredRole="ADMIN">
+            <AdminContainer />
+          </ProtectedRoute>
+        ),
         children: [
           {
             path: 'products',
@@ -146,7 +149,7 @@ const router = createBrowserRouter([
             ],
           },
           {
-            // element: <ProtectedRoute requiredRole="USER" />,
+            element: <ProtectedRoute requiredRole="USER" />,
             children: [
               {
                 path: '/cart',
