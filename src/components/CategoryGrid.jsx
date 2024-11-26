@@ -21,7 +21,7 @@ const CategoryGrid = () => {
 
   if (isLoading) return <ItemGridSkeleton />;
 
-  if (error) return <></>;
+  if (error) return <p>Ocurrió un error al cargar las categorías.</p>;
 
   if (categories) {
     return (

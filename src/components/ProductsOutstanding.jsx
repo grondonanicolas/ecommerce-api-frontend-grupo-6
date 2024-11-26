@@ -15,7 +15,7 @@ export default function ProductsOutstanding() {
 
   if (isLoading) return <ItemGridSkeleton />;
 
-  if (error) return <></>;
+  if (error) return <p>Ocurrió un error al cargar los productos destacados.</p>;
 
   if (data) {
     return (

@@ -15,7 +15,8 @@ export default function Favourites() {
     {
       url: 'users/favourite',
     },
-    FetcherSWR
+    FetcherSWR,
+    {revalidateOnMount: true, revalidateOnFocus: false},
   );
 
   if (isLoading) {
