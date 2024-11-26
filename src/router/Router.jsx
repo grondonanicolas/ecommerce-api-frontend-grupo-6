@@ -100,31 +100,17 @@ const router = createBrowserRouter([
       },
       {
         path: '/admin',
-        element: (
-          <ProtectedRoute requiredRole="ADMIN">
-            <AdminContainer />
-          </ProtectedRoute>
-        ),
+        element: <ProtectedRoute requiredRole="ADMIN" />,
         children: [
           {
-            path: 'products',
-            element: <ProductAdminBoard />,
-          },
-          {
-            path: 'products/create',
-            element: <ProductCreate />,
-          },
-          {
-            path: 'products/:productId',
-            element: <ProductAdmin />,
-          },
-          {
-            path: 'categories',
-            element: <CategoriesAdmin />,
-          },
-          {
-            path: 'users',
-            element: <UserAdmin />,
+            element: <AdminContainer />,
+            children: [
+              { path: 'products', element: <ProductAdminBoard /> },
+              { path: 'products/create', element: <ProductCreate /> },
+              { path: 'products/:productId', element: <ProductAdmin /> },
+              { path: 'categories', element: <CategoriesAdmin /> },
+              { path: 'users', element: <UserAdmin /> },
+            ],
           },
         ],
       },
